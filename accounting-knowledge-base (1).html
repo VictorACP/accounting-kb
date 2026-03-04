@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Knowledge Base</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-faint: #9090b0;
+    --paper: #faf9f6;
+    --paper-warm: #f3f0e8;
+    --rule: #e8e4d8;
+    --accent: #c84b31;
+    --accent-soft: #f0e6e2;
+    --gold: #b8962e;
+    --gold-soft: #f5f0e0;
+    --teal: #2a7d6e;
+    --teal-soft: #e0f0ec;
+    --sidebar-w: 280px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    width: var(--sidebar-w);
+    min-width: var(--sidebar-w);
+    background: var(--ink);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 3px solid var(--accent);
+  }
+
+  .sidebar-header {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .sidebar-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.05rem;
+    color: var(--gold);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .sidebar-sub {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .search-wrap {
+    padding: 16px 16px 8px;
+  }
+
+  #search {
+    width: 100%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 9px 14px;
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  #search::placeholder { color: rgba(255,255,255,0.3); }
+  #search:focus { border-color: var(--gold); }
+
+  .nav-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0 24px;
+  }
+
+  .nav-scroll::-webkit-scrollbar { width: 3px; }
+  .nav-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+  .nav-section {
+    margin-top: 8px;
+  }
+
+  .nav-section-label {
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    padding: 10px 20px 6px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 20px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+
+  .nav-item:hover {
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border-left-color: rgba(255,255,255,0.2);
+  }
+
+  .nav-item.active {
+    background: rgba(200,75,49,0.15);
+    color: #fff;
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+
+  .nav-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .nav-item.active .nav-dot { opacity: 1; }
+  .dot-red { background: var(--accent); }
+  .dot-gold { background: var(--gold); }
+  .dot-teal { background: #4ab8a5; }
+  .dot-blue { background: #6a8ccc; }
+
+  /* ── MAIN ── */
+  #main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  #topbar {
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .topbar-category {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .topbar-slash { color: var(--rule); font-size: 1.2rem; }
+
+  .topbar-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.45rem;
+    color: var(--ink);
+  }
+
+  .tag {
+    margin-left: auto;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+  }
+
+  .tag-policy { background: var(--gold-soft); color: var(--gold); }
+  .tag-howto { background: var(--teal-soft); color: var(--teal); }
+  .tag-both { background: var(--accent-soft); color: var(--accent); }
+
+  #content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 36px 40px 60px;
+  }
+
+  #content::-webkit-scrollbar { width: 4px; }
+  #content::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
+
+  /* ── CONTENT ELEMENTS ── */
+  .page { display: none; animation: fadeIn 0.2s ease; }
+  .page.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .intro-block {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .intro-block::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(200,75,49,0.15);
+  }
+
+  .intro-block p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.8);
+    max-width: 680px;
+  }
+
+  .intro-block strong { color: var(--gold); font-weight: 500; }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pill-policy { background: var(--gold-soft); color: var(--gold); }
+  .pill-howto { background: var(--teal-soft); color: var(--teal); }
+
+  .policy-box {
+    background: var(--gold-soft);
+    border: 1px solid #e0d0a0;
+    border-left: 4px solid var(--gold);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-bottom: 16px;
+  }
+
+  .policy-box h4 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .policy-box p, .policy-box li {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .policy-box ul { padding-left: 18px; }
+  .policy-box li { margin-bottom: 4px; }
+
+  .warn-box {
+    background: #fff5f3;
+    border: 1px solid #f5cfc8;
+    border-left: 4px solid var(--accent);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .warn-box strong { color: var(--accent); }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    margin-bottom: 16px;
+  }
+
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
+    background: var(--teal);
+    color: #fff;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border-radius: 50%;
+    margin-top: 1px;
+  }
+
+  .steps li p {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+
+  .steps li p strong {
+    font-weight: 600;
+    color: var(--teal);
+  }
+
+  .qbo-path {
+    display: inline-block;
+    background: #eef3fb;
+    border: 1px solid #c8d8f0;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: #3a5a9a;
+    margin: 1px 0;
+  }
+
+  .tip-box {
+    background: var(--teal-soft);
+    border: 1px solid #b0ddd5;
+    border-left: 4px solid var(--teal);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin: 16px 0;
+    font-size: 0.84rem;
+    line-height: 1.65;
+    color: var(--ink);
+  }
+
+  .tip-box strong { color: var(--teal); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 0.84rem;
+  }
+
+  th {
+    background: var(--ink);
+    color: #fff;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  tr:nth-child(even) td { background: var(--paper-warm); }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-left: 4px;
+  }
+
+  .badge-required { background: #fde8e5; color: var(--accent); }
+  .badge-optional { background: var(--teal-soft); color: var(--teal); }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* ── HOME PAGE ── */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .home-card {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 22px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-top: 3px solid var(--rule);
+  }
+
+  .home-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .home-card.red { border-top-color: var(--accent); }
+  .home-card.gold { border-top-color: var(--gold); }
+  .home-card.teal { border-top-color: var(--teal); }
+  .home-card.blue { border-top-color: #6a8ccc; }
+
+  .home-card-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .home-card.red .home-card-label { color: var(--accent); }
+  .home-card.gold .home-card-label { color: var(--gold); }
+  .home-card.teal .home-card-label { color: var(--teal); }
+  .home-card.blue .home-card-label { color: #6a8ccc; }
+
+  .home-card h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .home-card p {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    line-height: 1.6;
+  }
+
+  .home-card-count {
+    margin-top: 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 28px 0;
+  }
+
+  h2.page-h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .page-lead {
+    font-size: 0.88rem;
+    color: var(--ink-light);
+    line-height: 1.7;
+    max-width: 680px;
+    margin-bottom: 8px;
+  }
+
+  /* Search highlight */
+  .highlight { background: #fffacd; border-radius: 2px; }
+
+  /* Accordion */
+  .accordion { margin-bottom: 10px; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; }
+  .accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 18px;
+    cursor: pointer;
+    background: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    transition: background 0.15s;
+    user-select: none;
+  }
+  .accordion-header:hover { background: var(--paper-warm); }
+  .accordion-arrow { transition: transform 0.2s; color: var(--ink-faint); font-size: 0.8rem; }
+  .accordion.open .accordion-arrow { transform: rotate(180deg); }
+  .accordion-body { display: none; padding: 16px 18px 18px; border-top: 1px solid var(--rule); background: var(--paper); }
+  .accordion.open .accordion-body { display: block; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">Accounting KB</div>
+    <div class="sidebar-sub">Portfolio Operations · QBO</div>
+  </div>
+  <div class="search-wrap">
+    <input id="search" type="text" placeholder="Search topics…" oninput="doSearch(this.value)">
+  </div>
+  <div class="nav-scroll" id="navScroll">
+    <div class="nav-section">
+      <div class="nav-section-label">Overview</div>
+      <div class="nav-item active" onclick="show('home',this)" data-keywords="home overview start">
+        <span class="nav-dot dot-red"></span>Home
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Accounts Payable</div>
+      <div class="nav-item" onclick="show('ap-policy',this)" data-keywords="vendor bills policy accounts payable approval coding">
+        <span class="nav-dot dot-red"></span>AP Policy
+      </div>
+      <div class="nav-item" onclick="show('ap-bills',this)" data-keywords="enter vendor bill qbo how to accounts payable">
+        <span class="nav-dot dot-red"></span>Entering Vendor Bills
+      </div>
+      <div class="nav-item" onclick="show('ap-payments',this)" data-keywords="record payment bill pay qbo accounts payable">
+        <span class="nav-dot dot-red"></span>Recording Bill Payments
+      </div>
+      <div class="nav-item" onclick="show('ap-credits',this)" data-keywords="credit memo vendor accounts payable">
+        <span class="nav-dot dot-red"></span>Vendor Credit Memos
+      </div>
+      <div class="nav-item" onclick="show('ap-aging',this)" data-keywords="aging report AP accounts payable QBO">
+        <span class="nav-dot dot-red"></span>AP Aging Reports
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Accounts Receivable</div>
+      <div class="nav-item" onclick="show('ar-policy',this)" data-keywords="accounts receivable customer invoice policy terms">
+        <span class="nav-dot dot-gold"></span>AR Policy
+      </div>
+      <div class="nav-item" onclick="show('ar-invoices',this)" data-keywords="customer invoice qbo create accounts receivable">
+        <span class="nav-dot dot-gold"></span>Processing Customer Invoices
+      </div>
+      <div class="nav-item" onclick="show('ar-payments',this)" data-keywords="receive payment customer qbo accounts receivable">
+        <span class="nav-dot dot-gold"></span>Receiving Payments
+      </div>
+      <div class="nav-item" onclick="show('ar-credits',this)" data-keywords="credit memo customer accounts receivable qbo">
+        <span class="nav-dot dot-gold"></span>Customer Credit Memos
+      </div>
+      <div class="nav-item" onclick="show('ar-aging',this)" data-keywords="aging report AR accounts receivable QBO">
+        <span class="nav-dot dot-gold"></span>AR Aging Reports
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Intercompany</div>
+      <div class="nav-item" onclick="show('ic-policy',this)" data-keywords="intercompany policy elimination transactions portfolio">
+        <span class="nav-dot dot-blue"></span>Intercompany Policy
+      </div>
+      <div class="nav-item" onclick="show('ic-howto',this)" data-keywords="intercompany transaction record qbo journal entry">
+        <span class="nav-dot dot-blue"></span>Recording IC Transactions
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-section-label">Inventory</div>
+      <div class="nav-item" onclick="show('inv-policy',this)" data-keywords="inventory policy COGS purchase order valuation">
+        <span class="nav-dot dot-teal"></span>Inventory Policy
+      </div>
+      <div class="nav-item" onclick="show('inv-po',this)" data-keywords="purchase order receiving inventory qbo">
+        <span class="nav-dot dot-teal"></span>Purchase Orders & Receiving
+      </div>
+      <div class="nav-item" onclick="show('inv-cogs',this)" data-keywords="COGS cost of goods sold record qbo inventory">
+        <span class="nav-dot dot-teal"></span>Recording COGS
+      </div>
+      <div class="nav-item" onclick="show('inv-adjust',this)" data-keywords="inventory adjustment write down qbo shrinkage">
+        <span class="nav-dot dot-teal"></span>Inventory Adjustments
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="topbar">
+    <span class="topbar-category" id="topbar-cat">Overview</span>
+    <span class="topbar-slash">/</span>
+    <span class="topbar-title" id="topbar-title">Home</span>
+    <span class="tag tag-both" id="topbar-tag">Knowledge Base</span>
+  </div>
+
+  <div id="content">
+
+    <!-- ══════════════ HOME ══════════════ -->
+    <div id="page-home" class="page active">
+      <div class="intro-block">
+        <p>Welcome to the <strong>Portfolio Accounting Knowledge Base</strong>. This guide is written for team members at portfolio companies who perform accounting tasks in QBO but may not have a formal accounting background. Each section includes <strong>the policy</strong> (the <em>why</em> and the rules) followed by <strong>step-by-step QBO instructions</strong> (the <em>how</em>). When in doubt, follow the policy exactly — consistency across companies is the goal.</p>
+      </div>
+      <h2 class="page-h2">Browse by Topic</h2>
+      <p class="page-lead">Select a section below or use the sidebar to navigate. Sections marked <span style="color:var(--gold);font-weight:600">Policy</span> define the rules; sections marked <span style="color:var(--teal);font-weight:600">How-To</span> show you where to click in QBO.</p>
+      <div class="home-grid">
+        <div class="home-card red" onclick="show('ap-policy', null)">
+          <div class="home-card-label">Accounts Payable</div>
+          <h3>Vendor Bills & Payments</h3>
+          <p>Policies and QBO steps for entering bills, making payments, managing vendor credits, and reviewing aging.</p>
+          <div class="home-card-count">5 articles</div>
+        </div>
+        <div class="home-card gold" onclick="show('ar-policy', null)">
+          <div class="home-card-label">Accounts Receivable</div>
+          <h3>Invoices & Collections</h3>
+          <p>Policies and QBO steps for customer invoicing, receiving payments, credit memos, and reviewing aging.</p>
+          <div class="home-card-count">5 articles</div>
+        </div>
+        <div class="home-card blue" onclick="show('ic-policy', null)">
+          <div class="home-card-label">Intercompany</div>
+          <h3>Cross-Entity Transactions</h3>
+          <p>How to record and document transactions between portfolio companies so they eliminate cleanly at consolidation.</p>
+          <div class="home-card-count">2 articles</div>
+        </div>
+        <div class="home-card teal" onclick="show('inv-policy', null)">
+          <div class="home-card-label">Inventory</div>
+          <h3>Stock, COGS & Adjustments</h3>
+          <p>Policies for inventory valuation and QBO workflows for purchase orders, COGS recording, and adjustments.</p>
+          <div class="home-card-count">4 articles</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h2 class="page-h2">Golden Rules</h2>
+      <p class="page-lead">These principles apply across every portfolio company, regardless of COA differences.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px">
+        <div class="policy-box">
+          <h4>📋 Always Match the Approval</h4>
+          <p>No bill or payment should be entered in QBO without a corresponding approved document (PO, invoice, or email sign-off). Attach the source document in QBO at time of entry.</p>
+        </div>
+        <div class="policy-box">
+          <h4>🗓 Use the Correct Date</h4>
+          <p>Always use the <em>vendor invoice date</em> for bills and the <em>actual receipt date</em> for payments — not today's date unless they're the same. Period-end accuracy depends on this.</p>
+        </div>
+        <div class="policy-box">
+          <h4>🏷 Code to the Right Account</h4>
+          <p>Each company has its own chart of accounts. If you're unsure which account to use, refer to the COA mapping document or ask the controller before posting.</p>
+        </div>
+        <div class="policy-box">
+          <h4>🔄 No Manual Bank Adjustments</h4>
+          <p>Never adjust a bank balance manually. All differences must be explained through reconciling items, and unresolved items must be escalated within 3 business days of month-end.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════ AP POLICY ══════════════ -->
+    <div id="page-ap-policy" class="page">
+      <div class="section-title">Accounts Payable <span class="pill pill-policy">Policy</span></div>
+
+      <div class="policy-box">
+        <h4>Purpose</h4>
+        <p>This policy ensures all vendor obligations are recorded accurately, in the correct period, and with proper documentation — so that cash flow projections, aging reports, and financial statements are reliable across all portfolio companies.</p>
+      </div>
+
+      <div class="section-title" style="margin-top:20px">Approval Requirements</div>
+      <table>
+        <thead><tr><th>Bill Amount</th><th>Required Approval</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>Under $500</td><td>Department manager email or verbal (documented)</td><td>Attach email or note in QBO memo</td></tr>
+          <tr><td>$500 – $5,000</td><td>Department manager written approval</td><td>Attach signed PO or approval email to bill in QBO</td></tr>
+          <tr><td>Over $5,000</td><td>Controller sign-off required</td><td>Do not enter in QBO until controller confirms</td></tr>
+          <tr><td>Any new vendor</td><td>Controller approval regardless of amount</td><td>New vendor setup must be completed first</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Coding Rules</div>
+      <div class="policy-box">
+        <h4>Account Classification</h4>
+        <ul>
+          <li>Goods or services <strong>fully consumed in the current period</strong>: expense account in the period received.</li>
+          <li>Goods received but <strong>not yet received/verified</strong>: hold in Accrued Liabilities until confirmed, then reclassify.</li>
+          <li>Prepaid expenses (e.g. insurance, subscriptions &gt;1 month): record to <em>Prepaid Expenses</em> asset account and amortize monthly.</li>
+          <li>Capital items over $2,500: do not expense — notify controller for capitalization treatment.</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Payment Terms & Timing</div>
+      <div class="policy-box">
+        <h4>Default Terms</h4>
+        <ul>
+          <li>Pay vendors within stated terms (Net 30 is default unless contract differs).</li>
+          <li>Early payment discounts (e.g. 2/10 Net 30) must be approved by controller before taking — record the discount to <em>Purchase Discounts</em> or as a reduction of the expense.</li>
+          <li>Do not pay a bill that does not match an approved PO or invoice. Escalate discrepancies immediately.</li>
+        </ul>
+      </div>
+
+      <div class="warn-box"><strong>⚠ Duplicate Payment Risk:</strong> Before entering a vendor bill, search QBO for the vendor name and confirm the invoice number has not already been entered. Duplicate invoice numbers from the same vendor are a red flag — do not override the warning.</div>
+    </div>
+
+    <!-- ══════════════ AP BILLS ══════════════ -->
+    <div id="page-ap-bills" class="page">
+      <div class="section-title">Entering Vendor Bills in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">Follow these steps every time you receive a vendor invoice that needs to be paid. A "bill" in QBO creates an amount owed — it does not move cash until you record a payment.</p>
+
+      <div class="tip-box"><strong>Before you start:</strong> Make sure you have the physical or digital vendor invoice in hand, approval has been obtained per the AP Policy, and you know which expense account to use. If unsure on the account, check with the controller.</div>
+
+      <ol class="steps">
+        <li><p><strong>Navigate to Bills.</strong> From the QBO left menu, click <span class="qbo-path">+ New</span> → <span class="qbo-path">Bill</span> (under Vendors column).</p></li>
+        <li><p><strong>Select the Vendor.</strong> In the <em>Vendor</em> dropdown, search for and select the vendor. If the vendor is not listed, <strong>stop</strong> — new vendors require controller approval before setup.</p></li>
+        <li><p><strong>Set the Bill Date.</strong> Enter the date printed on the vendor's invoice — not today's date unless they match. This determines which accounting period the expense falls in.</p></li>
+        <li><p><strong>Enter the Due Date.</strong> QBO may auto-fill this based on saved terms. Verify it matches the invoice. Correct it if needed.</p></li>
+        <li><p><strong>Enter the Invoice/Reference Number.</strong> Type the vendor's invoice number exactly as it appears in the <em>Bill no.</em> field. This is critical for preventing duplicates and for vendor queries.</p></li>
+        <li><p><strong>Add Line Items.</strong> In the table at the bottom, for each line: select the correct <em>Account</em>, enter a <em>Description</em> (be specific — e.g. "Office supplies – March 2025" not just "supplies"), and enter the <em>Amount</em>.</p></li>
+        <li><p><strong>Apply Class/Location (if your company uses them).</strong> If your QBO is set up with Class or Location tracking, select the appropriate values on each line. Do not leave these blank if they are required fields.</p></li>
+        <li><p><strong>Attach the Invoice.</strong> Click the <em>Attachments</em> paperclip icon and upload a scan or PDF of the vendor invoice. This is <strong>required</strong> for all bills.</p></li>
+        <li><p><strong>Add a Memo.</strong> In the <em>Memo</em> field at the bottom, note who approved the bill and the date of approval (e.g. "Approved by J. Smith 2025-03-10").</p></li>
+        <li><p><strong>Save.</strong> Click <span class="qbo-path">Save and close</span>. The bill will now appear in the AP aging and is ready to be paid when due.</p></li>
+      </ol>
+
+      <div class="warn-box"><strong>⚠ Common Errors:</strong> Using today's date instead of the invoice date; leaving the bill number blank; coding the full amount of a multi-period contract to a single period expense. When in doubt, ask before saving.</div>
+    </div>
+
+    <!-- ══════════════ AP PAYMENTS ══════════════ -->
+    <div id="page-ap-payments" class="page">
+      <div class="section-title">Recording Bill Payments in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">Use this process when a payment has been made (check cleared, ACH sent, wire confirmed). Do not record a payment until the money has actually left the bank account.</p>
+
+      <ol class="steps">
+        <li><p><strong>Navigate to Pay Bills.</strong> Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Pay Bills</span> (under Vendors).</p></li>
+        <li><p><strong>Select the Payment Account.</strong> In the <em>Payment account</em> dropdown, select the correct bank account from which payment was made. If payment was via credit card, use the credit card account instead.</p></li>
+        <li><p><strong>Set the Payment Date.</strong> Enter the date the payment actually left your account (ACH send date, check date, wire date). Not the invoice due date.</p></li>
+        <li><p><strong>Find the Bill(s) to Pay.</strong> The list will show all open bills. Check the box next to the bill(s) this payment covers.</p></li>
+        <li><p><strong>Verify the Amount.</strong> Confirm the <em>Payment</em> column matches what was actually paid. If you're making a partial payment, edit the amount in that field.</p></li>
+        <li><p><strong>Enter Check/Reference Number.</strong> In the <em>Ref no.</em> field, enter the check number, ACH confirmation number, or wire reference. This is essential for bank reconciliation.</p></li>
+        <li><p><strong>Save.</strong> Click <span class="qbo-path">Save and close</span>. The bill status will update to Paid and the payment will appear in the bank account register.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Partial Payments:</strong> If paying only part of a bill, enter the partial amount in the Payment column. The remaining balance will stay open in AP aging. Always note the reason in the Memo field (e.g. "Partial payment per agreement with vendor – balance due 4/15").</div>
+
+      <div class="warn-box"><strong>⚠ Never use "Write Check" to pay a bill that was already entered as a Bill.</strong> This creates a duplicate expense. Always use Pay Bills to clear open bill balances.</div>
+    </div>
+
+    <!-- ══════════════ AP CREDITS ══════════════ -->
+    <div id="page-ap-credits" class="page">
+      <div class="section-title">Vendor Credit Memos <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">A vendor credit memo reduces the amount you owe a vendor — it may result from a returned item, billing error, or agreed discount. Never delete a bill to correct it; use a credit memo instead.</p>
+
+      <div class="section-title" style="margin-top:4px">Creating a Vendor Credit</div>
+      <ol class="steps">
+        <li><p><strong>Navigate to Vendor Credit.</strong> Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Vendor Credit</span> (under Vendors).</p></li>
+        <li><p><strong>Select the Vendor.</strong> Choose the same vendor as the original bill.</p></li>
+        <li><p><strong>Enter the Credit Date.</strong> Use the date on the vendor's credit memo document.</p></li>
+        <li><p><strong>Enter the Vendor's Credit Reference Number</strong> in the <em>Ref no.</em> field.</p></li>
+        <li><p><strong>Code to the Same Account.</strong> Use the same expense account as the original bill. This properly reverses the cost. If the credit relates to a returned inventory item, use the Inventory account.</p></li>
+        <li><p><strong>Enter the Amount</strong> and a clear <em>Description</em> (e.g. "Return of defective units per RMA#1234").</p></li>
+        <li><p><strong>Attach</strong> the vendor's credit memo document.</p></li>
+        <li><p><strong>Save.</strong> Click <span class="qbo-path">Save and close</span>. The credit will now appear as an open credit for this vendor.</p></li>
+      </ol>
+
+      <div class="section-title">Applying a Vendor Credit to a Bill</div>
+      <ol class="steps">
+        <li><p>Go to <span class="qbo-path">+ New</span> → <span class="qbo-path">Pay Bills</span>.</p></li>
+        <li><p>Select the vendor and find the bill you want to apply the credit to.</p></li>
+        <li><p>QBO will display an open credit at the bottom of the screen. Check the credit to apply it. The payment amount will reduce automatically.</p></li>
+        <li><p>Pay the remaining balance (if any) and save.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Credits vs. Refunds:</strong> If the vendor is sending you actual cash back (a check or bank deposit), do not use Vendor Credit — use <span class="qbo-path">Deposit</span> and code to the original expense account. Ask the controller if you're unsure which applies.</div>
+    </div>
+
+    <!-- ══════════════ AP AGING ══════════════ -->
+    <div id="page-ap-aging" class="page">
+      <div class="section-title">AP Aging Reports in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">The AP Aging report shows all unpaid vendor bills organized by how overdue they are. Review this at minimum weekly, and always before month-end close.</p>
+
+      <ol class="steps">
+        <li><p>From the left menu, click <span class="qbo-path">Reports</span>.</p></li>
+        <li><p>In the search bar, type <em>Accounts Payable Aging</em> and select <strong>Accounts Payable Aging Detail</strong> (the detail version shows individual bills; the summary shows totals by vendor).</p></li>
+        <li><p>Set the <em>Report date</em> to today (or the last day of the period you're reviewing).</p></li>
+        <li><p>Set <em>Aging method</em> to <strong>Report date</strong> (not "Current date") so the report is reproducible.</p></li>
+        <li><p>Click <span class="qbo-path">Run report</span>.</p></li>
+        <li><p>Review each column: Current, 1–30, 31–60, 61–90, 91+. Any bill in the 61+ columns needs immediate attention.</p></li>
+        <li><p>Export to Excel via <span class="qbo-path">Export</span> → <span class="qbo-path">Export to Excel</span> if you need to share with the controller.</p></li>
+      </ol>
+
+      <div class="policy-box">
+        <h4>Escalation Rules</h4>
+        <ul>
+          <li>Any bill <strong>over 60 days past due</strong>: notify the controller within 24 hours.</li>
+          <li>Any bill <strong>over $10,000 outstanding</strong> for more than 30 days: flag for review.</li>
+          <li>Bills with a <strong>zero or negative balance</strong> showing in aging: investigate — this may indicate a misapplied payment or unapplied credit. Do not ignore these.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════════ AR POLICY ══════════════ -->
+    <div id="page-ar-policy" class="page">
+      <div class="section-title">Accounts Receivable <span class="pill pill-policy">Policy</span></div>
+
+      <div class="policy-box">
+        <h4>Purpose</h4>
+        <p>This policy ensures revenue is recognized in the correct period, customer balances are collected on time, and the AR aging is accurate for cash flow forecasting and financial reporting.</p>
+      </div>
+
+      <div class="section-title">Invoice Issuance Rules</div>
+      <div class="policy-box">
+        <h4>When to Invoice</h4>
+        <ul>
+          <li>Invoice upon delivery of goods or completion of services — <strong>not</strong> when payment is received.</li>
+          <li>For long-term contracts with milestones, invoice only when the milestone is met and documented.</li>
+          <li>Recurring invoices (subscriptions, retainers) must be sent on the first business day of the billing period.</li>
+          <li>Never backdate an invoice into a prior closed period without controller approval.</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Standard Payment Terms</div>
+      <table>
+        <thead><tr><th>Customer Type</th><th>Default Terms</th><th>Override Process</th></tr></thead>
+        <tbody>
+          <tr><td>Commercial customers</td><td>Net 30</td><td>Controller approval required</td></tr>
+          <tr><td>Government / Institutional</td><td>Net 45</td><td>Controller approval required</td></tr>
+          <tr><td>New customers (first 3 invoices)</td><td>Due on receipt</td><td>Controller approval to extend</td></tr>
+          <tr><td>Recurring / subscription</td><td>Due on receipt or Net 15</td><td>Per contract terms</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Collections</div>
+      <div class="policy-box">
+        <h4>Follow-Up Schedule</h4>
+        <ul>
+          <li><strong>Day 31 (1 day overdue):</strong> Send a courteous reminder email — QBO can automate this.</li>
+          <li><strong>Day 45:</strong> Phone call + email from the local team.</li>
+          <li><strong>Day 60:</strong> Escalate to controller. No additional goods or services to be extended to this customer until resolved.</li>
+          <li><strong>Day 90+:</strong> Controller determines write-off or collections agency referral.</li>
+        </ul>
+      </div>
+
+      <div class="warn-box"><strong>⚠ Write-offs require controller approval</strong> — never apply a credit or write off a balance without explicit sign-off, even for small amounts.</div>
+    </div>
+
+    <!-- ══════════════ AR INVOICES ══════════════ -->
+    <div id="page-ar-invoices" class="page">
+      <div class="section-title">Processing Customer Invoices in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">Creating an invoice in QBO records that a customer owes you money. It does not record cash — that happens when you receive payment.</p>
+
+      <ol class="steps">
+        <li><p><strong>Navigate to Invoice.</strong> Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Invoice</span> (under Customers).</p></li>
+        <li><p><strong>Select the Customer.</strong> Search for the customer in the <em>Customer</em> dropdown. If they don't exist, stop and follow the new customer setup process — do not create on-the-fly without approval.</p></li>
+        <li><p><strong>Set the Invoice Date.</strong> Enter the date goods were delivered or services were completed. This is the revenue recognition date.</p></li>
+        <li><p><strong>Set the Due Date / Payment Terms.</strong> Verify the terms match what is in the customer's contract or the AR policy. Adjust if needed.</p></li>
+        <li><p><strong>Add a unique Invoice Number.</strong> QBO auto-numbers invoices — do not change the sequence unless instructed by the controller.</p></li>
+        <li><p><strong>Add Line Items.</strong> For each product or service: select the <em>Product/Service</em>, enter a <em>Description</em>, <em>Quantity</em>, and <em>Rate</em>. The income account is pre-mapped to the product/service item — do not override it unless you are certain.</p></li>
+        <li><p><strong>Apply Tax (if applicable).</strong> If sales tax applies, ensure the correct tax code is selected per your state/locality.</p></li>
+        <li><p><strong>Add a Customer Message</strong> if needed (e.g. payment instructions, PO reference number the customer requires).</p></li>
+        <li><p><strong>Save and Send.</strong> Click <span class="qbo-path">Save and send</span> to email the invoice to the customer, or <span class="qbo-path">Save and close</span> if sending manually.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Product/Service Items Matter:</strong> Revenue is coded based on the Product/Service item selected, not the line description. Always pick the correct item — if you're unsure, ask before saving.</div>
+    </div>
+
+    <!-- ══════════════ AR PAYMENTS ══════════════ -->
+    <div id="page-ar-payments" class="page">
+      <div class="section-title">Receiving Customer Payments in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">Record a customer payment as soon as you confirm the funds have been received — ACH cleared, check deposited, or wire confirmed. Do not record anticipated payments.</p>
+
+      <ol class="steps">
+        <li><p><strong>Navigate to Receive Payment.</strong> Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Receive Payment</span> (under Customers).</p></li>
+        <li><p><strong>Select the Customer.</strong> All open invoices for this customer will appear below.</p></li>
+        <li><p><strong>Set the Payment Date.</strong> Use the date the payment was actually received/cleared, not the invoice date.</p></li>
+        <li><p><strong>Select Payment Method.</strong> Choose: Check, ACH/EFT, Credit Card, Wire, or Cash. This is required for bank reconciliation accuracy.</p></li>
+        <li><p><strong>Enter Reference Number.</strong> Check number, wire reference, or ACH trace number. Leave blank for cash.</p></li>
+        <li><p><strong>Select the Deposit To Account.</strong> Choose the correct bank account. If checks are being batched for deposit, select <em>Undeposited Funds</em> and record the actual deposit separately when it clears.</p></li>
+        <li><p><strong>Check the Invoice(s) Being Paid.</strong> Tick the boxes next to the invoices this payment covers. QBO will auto-fill amounts.</p></li>
+        <li><p><strong>Handle Partial Payments.</strong> If the customer paid less than the full amount, edit the <em>Payment</em> column to the actual amount received. Leave the balance open — do not write it off without controller approval.</p></li>
+        <li><p><strong>Save.</strong> Click <span class="qbo-path">Save and close</span>.</p></li>
+      </ol>
+
+      <div class="warn-box"><strong>⚠ Undeposited Funds:</strong> If you use Undeposited Funds as the "deposit to" account, you must then record the actual bank deposit via <span class="qbo-path">+ New → Bank Deposit</span>. Leaving items in Undeposited Funds without clearing them is one of the most common causes of bank reconciliation errors.</div>
+    </div>
+
+    <!-- ══════════════ AR CREDITS ══════════════ -->
+    <div id="page-ar-credits" class="page">
+      <div class="section-title">Customer Credit Memos <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">A credit memo reduces what a customer owes you. Issue one for returns, billing errors, or goodwill adjustments — with controller approval for any amount over $500.</p>
+
+      <div class="section-title" style="margin-top:4px">Creating a Credit Memo</div>
+      <ol class="steps">
+        <li><p>Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Credit Memo</span> (under Customers).</p></li>
+        <li><p>Select the <strong>Customer</strong>.</p></li>
+        <li><p>Set the <strong>Credit Memo Date</strong> — use the date the credit is being issued, not the original invoice date.</p></li>
+        <li><p>Add line items using the <strong>same Product/Service</strong> as the original invoice. This reverses the revenue correctly.</p></li>
+        <li><p>In the <em>Message</em> field, note the reason (e.g., "Return per RMA #456 — controller approved 3/10/25").</p></li>
+        <li><p>Click <span class="qbo-path">Save and close</span>.</p></li>
+      </ol>
+
+      <div class="section-title">Applying a Credit Memo</div>
+      <ol class="steps">
+        <li><p>Open the customer's next invoice or go to <span class="qbo-path">Receive Payment</span> for this customer.</p></li>
+        <li><p>QBO will show the available credit at the bottom. Check the credit to apply it against an open invoice.</p></li>
+        <li><p>If the credit exceeds the invoice balance, the remainder stays as an open credit on the customer account until applied to a future invoice.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Refund vs. Credit:</strong> If you are sending money back to the customer (check or bank transfer), use <span class="qbo-path">+ New → Refund Receipt</span> instead. Ask the controller which applies for your situation.</div>
+    </div>
+
+    <!-- ══════════════ AR AGING ══════════════ -->
+    <div id="page-ar-aging" class="page">
+      <div class="section-title">AR Aging Reports in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">The AR Aging report shows all unpaid customer invoices by how overdue they are. Run this weekly and send to the controller before month-end.</p>
+
+      <ol class="steps">
+        <li><p>From the left menu, click <span class="qbo-path">Reports</span>.</p></li>
+        <li><p>Search for <em>Accounts Receivable Aging</em>. Select <strong>Accounts Receivable Aging Detail</strong>.</p></li>
+        <li><p>Set <em>Report date</em> to today or the last day of the month.</p></li>
+        <li><p>Set <em>Aging method</em> to <strong>Report date</strong>.</p></li>
+        <li><p>Click <span class="qbo-path">Run report</span>.</p></li>
+        <li><p>Review columns: Current, 1–30, 31–60, 61–90, 91+. Flag any balance in the 61+ columns for follow-up per the AR Policy.</p></li>
+        <li><p>Export via <span class="qbo-path">Export → Export to Excel</span>.</p></li>
+      </ol>
+
+      <div class="policy-box">
+        <h4>What to Look For</h4>
+        <ul>
+          <li><strong>Negative balances</strong> in aging = overpayment or unapplied credit — investigate immediately.</li>
+          <li><strong>Same customer with many small overdue balances</strong> = may indicate disputed invoices — escalate.</li>
+          <li><strong>Very old invoices (91+)</strong> = need controller review for write-off consideration.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════════ IC POLICY ══════════════ -->
+    <div id="page-ic-policy" class="page">
+      <div class="section-title">Intercompany Transactions <span class="pill pill-policy">Policy</span></div>
+
+      <div class="policy-box">
+        <h4>Purpose</h4>
+        <p>Intercompany (IC) transactions occur when one portfolio company buys from, sells to, loans money to, or incurs costs on behalf of another. These must be recorded identically on both sides so they eliminate cleanly when the controller consolidates financial statements. Errors here cause the most significant audit and reporting problems.</p>
+      </div>
+
+      <div class="section-title">Core Rules</div>
+      <div class="policy-box">
+        <h4>The Mirror Principle</h4>
+        <ul>
+          <li>Every IC transaction must be recorded in <strong>both</strong> companies in QBO before month-end close.</li>
+          <li>The amount, date, and description must be <strong>identical</strong> in both entities.</li>
+          <li>One company records an IC Receivable; the other records an IC Payable — using dedicated IC accounts (do not use general AR/AP).</li>
+          <li>All IC transactions require a written reference (email, shared memo, or IC transaction log) that both sides can point to.</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Dedicated Account Codes</div>
+      <div class="warn-box">Because each portfolio company has its own COA, contact the controller to confirm the exact account numbers used for Intercompany Receivable, Intercompany Payable, and Intercompany Revenue/Expense at your specific entity. <strong>Do not use generic AR or AP accounts for IC transactions.</strong></div>
+
+      <table>
+        <thead><tr><th>Transaction Type</th><th>Sending Company Books</th><th>Receiving Company Books</th></tr></thead>
+        <tbody>
+          <tr><td>Cash transfer / loan</td><td>Debit: IC Receivable</td><td>Credit: IC Payable</td></tr>
+          <tr><td>Goods sold between entities</td><td>Debit: IC Receivable / Credit: IC Revenue</td><td>Debit: IC Expense / Credit: IC Payable</td></tr>
+          <tr><td>Shared cost allocation (e.g. rent, IT)</td><td>Debit: IC Receivable / Credit: Expense</td><td>Debit: Expense / Credit: IC Payable</td></tr>
+          <tr><td>Management fee</td><td>Debit: IC Receivable / Credit: Management Fee Income</td><td>Debit: Management Fee Expense / Credit: IC Payable</td></tr>
+        </tbody>
+      </table>
+
+      <div class="section-title">Monthly IC Reconciliation</div>
+      <div class="policy-box">
+        <h4>Required Before Month-End Close</h4>
+        <ul>
+          <li>Both sides must confirm their IC balances match — the controller sends a reconciliation template on the 25th of each month.</li>
+          <li>Unreconciled IC differences must be explained and resolved before the books are closed. Do not let differences roll forward.</li>
+          <li>IC transactions must never be partially recorded (e.g., only one side books the entry).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════════ IC HOWTO ══════════════ -->
+    <div id="page-ic-howto" class="page">
+      <div class="section-title">Recording Intercompany Transactions in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">There is no automated IC feature in QBO — you must make journal entries or use IC-specific bill/invoice workflows manually on both sides. Below is the most reliable method.</p>
+
+      <div class="tip-box"><strong>Always confirm the IC accounts with the controller</strong> before your first intercompany entry. Using the wrong account codes will cause consolidation errors that are difficult to unwind.</div>
+
+      <div class="section-title" style="margin-top:8px">Method: Journal Entry (Most Common)</div>
+      <p style="font-size:0.875rem;line-height:1.7;color:var(--ink-light);margin-bottom:16px">Used for cost allocations, management fees, and cash transfers. Must be entered in both entities.</p>
+
+      <div class="two-col">
+        <div class="policy-box">
+          <h4>Company A (Sender)</h4>
+          <p>Click <span class="qbo-path">+ New → Journal Entry</span><br><br>
+          Line 1: Debit <em>IC Receivable – [Company B]</em><br>
+          Line 2: Credit <em>relevant income or expense account</em><br><br>
+          Memo: "IC allocation to [Company B] – [Month] – per [reference]"</p>
+        </div>
+        <div class="policy-box">
+          <h4>Company B (Receiver)</h4>
+          <p>Click <span class="qbo-path">+ New → Journal Entry</span><br><br>
+          Line 1: Debit <em>relevant expense account</em><br>
+          Line 2: Credit <em>IC Payable – [Company A]</em><br><br>
+          Memo: "IC allocation from [Company A] – [Month] – per [reference]"<br><br>
+          <strong>Date and amount must match Company A exactly.</strong></p>
+        </div>
+      </div>
+
+      <div class="section-title">Method: IC Invoice/Bill Workflow</div>
+      <p style="font-size:0.875rem;line-height:1.7;color:var(--ink-light);margin-bottom:16px">Used when goods or services flow between entities and you want a paper trail with an invoice number.</p>
+      <ol class="steps">
+        <li><p>In <strong>Company A</strong> (selling entity): create a standard <span class="qbo-path">Invoice</span> to a customer named "[Company B] – Intercompany." Use the IC Revenue account, not regular revenue.</p></li>
+        <li><p>In <strong>Company B</strong> (buying entity): create a <span class="qbo-path">Bill</span> from vendor "[Company A] – Intercompany." Use the IC Expense account. Reference Company A's invoice number in the Bill no. field.</p></li>
+        <li><p>When cash settles between entities, record the payment on both sides — <span class="qbo-path">Pay Bills</span> in Company B and <span class="qbo-path">Receive Payment</span> in Company A — on the same date.</p></li>
+      </ol>
+
+      <div class="warn-box"><strong>⚠ Month-End Check:</strong> Pull the IC Receivable balance from Company A and the IC Payable balance from Company B. They must be equal. If they differ, do not close the books — investigate and correct the discrepancy first.</div>
+    </div>
+
+    <!-- ══════════════ INV POLICY ══════════════ -->
+    <div id="page-inv-policy" class="page">
+      <div class="section-title">Inventory <span class="pill pill-policy">Policy</span></div>
+
+      <div class="policy-box">
+        <h4>Purpose</h4>
+        <p>Consistent inventory accounting ensures that cost of goods sold (COGS) is recorded in the same period as the related revenue, that balance sheet inventory values are accurate, and that physical counts align with the books.</p>
+      </div>
+
+      <div class="section-title">Inventory Valuation Method</div>
+      <div class="policy-box">
+        <h4>Method: FIFO (First In, First Out)</h4>
+        <p>All portfolio companies use FIFO unless the controller has specifically approved an alternative in writing. QBO's inventory module uses average cost by default — confirm with the controller how your entity is set up. <strong>Do not change the inventory valuation method in QBO settings without controller approval.</strong></p>
+      </div>
+
+      <div class="section-title">Capitalization of Inventory Costs</div>
+      <div class="policy-box">
+        <h4>What Goes Into Inventory Cost</h4>
+        <ul>
+          <li>Purchase price of goods (net of trade discounts)</li>
+          <li>Freight-in and import duties</li>
+          <li>Applicable handling costs</li>
+          <li><strong>Not included:</strong> storage costs after receipt, freight-out (selling expense), or administrative overhead</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Inventory Write-Downs & Obsolescence</div>
+      <div class="policy-box">
+        <h4>Rules</h4>
+        <ul>
+          <li>Inventory may only be written down (not up) — do not increase inventory values above cost without controller sign-off.</li>
+          <li>Items that have not moved in <strong>180 days</strong> must be flagged for review by the controller.</li>
+          <li>Write-downs require controller approval and must be documented with a reason (damaged, obsolete, excess).</li>
+          <li>Physical counts must be reconciled to QBO at least <strong>quarterly</strong>. Variances over $500 or 5% of total inventory value (whichever is lower) must be investigated before adjustment.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ══════════════ INV PO ══════════════ -->
+    <div id="page-inv-po" class="page">
+      <div class="section-title">Purchase Orders & Receiving Inventory in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">The PO workflow creates a three-way match: Purchase Order → Item Receipt → Vendor Bill. All three steps must be completed for inventory purchases.</p>
+
+      <div class="section-title" style="margin-top:4px">Step 1 — Create a Purchase Order</div>
+      <ol class="steps">
+        <li><p>Click <span class="qbo-path">+ New</span> → <span class="qbo-path">Purchase Order</span>.</p></li>
+        <li><p>Select the <strong>Vendor</strong> and set the <strong>PO Date</strong> and expected <strong>Ship-by date</strong>.</p></li>
+        <li><p>Add line items: select the inventory <strong>Product/Service</strong> item (not an account), enter <strong>Quantity</strong> and <strong>Rate</strong>. QBO will link the cost to inventory automatically via the item setup.</p></li>
+        <li><p>Add a <strong>Memo</strong> with any special instructions or the internal approval reference.</p></li>
+        <li><p>Click <span class="qbo-path">Save and close</span>. Send the PO to the vendor.</p></li>
+      </ol>
+
+      <div class="section-title">Step 2 — Receive Items</div>
+      <ol class="steps">
+        <li><p>When goods physically arrive, open the original PO: <span class="qbo-path">Expenses → Purchase Orders → [find PO]</span>.</p></li>
+        <li><p>Click <span class="qbo-path">Copy to → Item Receipt</span> (or <span class="qbo-path">Receive Items</span> depending on your QBO version/settings).</p></li>
+        <li><p>Adjust quantities to reflect what was <em>actually</em> received (may differ from PO). Note any shortages or overages in the Memo field.</p></li>
+        <li><p>Set the receipt date to <strong>today</strong> (the date goods arrived — this is when inventory hits your books).</p></li>
+        <li><p>Save. Inventory balances will increase immediately.</p></li>
+      </ol>
+
+      <div class="section-title">Step 3 — Enter the Vendor Bill</div>
+      <ol class="steps">
+        <li><p>When the vendor invoice arrives, open the PO again and click <span class="qbo-path">Copy to → Bill</span>.</p></li>
+        <li><p>Verify amounts match the vendor invoice. Investigate any discrepancy before saving.</p></li>
+        <li><p>Set the <strong>Bill Date</strong> to the vendor invoice date.</p></li>
+        <li><p>Attach the vendor invoice. Save.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Three-Way Match:</strong> PO quantity = Received quantity = Billed quantity. Discrepancies must be resolved before paying the bill. Never pay a bill that doesn't match what was received.</div>
+    </div>
+
+    <!-- ══════════════ INV COGS ══════════════ -->
+    <div id="page-inv-cogs" class="page">
+      <div class="section-title">Recording COGS in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">In QBO with inventory tracking enabled, COGS is recorded <em>automatically</em> when you create a sales invoice or sales receipt using an inventory item. Understanding this flow prevents double-counting errors.</p>
+
+      <div class="section-title" style="margin-top:4px">How COGS Flows Automatically</div>
+      <div class="policy-box">
+        <h4>The Automatic Entry (When You Invoice a Customer)</h4>
+        <p>When you sell an inventory item via an invoice or sales receipt, QBO makes two simultaneous entries:</p>
+        <ul style="margin-top:8px">
+          <li><strong>Revenue side:</strong> Debit Accounts Receivable / Credit Sales Revenue</li>
+          <li><strong>COGS side:</strong> Debit COGS / Credit Inventory Asset</li>
+        </ul>
+        <p style="margin-top:8px">You do not need to manually create a COGS journal entry. If someone has been doing this manually, they were likely double-counting — alert the controller.</p>
+      </div>
+
+      <div class="section-title">When Manual COGS Entries Are Needed</div>
+      <div class="policy-box">
+        <h4>Exceptions Only — Controller Approval Required</h4>
+        <ul>
+          <li>Goods given away as samples or promotional items (not invoiced)</li>
+          <li>Internal use of inventory (consumed in operations)</li>
+          <li>Period-end COGS adjustment if inventory count reveals a variance</li>
+        </ul>
+      </div>
+
+      <div class="section-title">Manual COGS Journal Entry (Exceptions Only)</div>
+      <ol class="steps">
+        <li><p>Click <span class="qbo-path">+ New → Journal Entry</span>.</p></li>
+        <li><p><strong>Line 1:</strong> Debit <em>Cost of Goods Sold</em> — enter the cost value of inventory removed.</p></li>
+        <li><p><strong>Line 2:</strong> Credit <em>Inventory Asset</em> — same amount.</p></li>
+        <li><p>In the <strong>Memo</strong> field, state the reason clearly: "Samples given to XYZ Corp — 50 units @ $12.00 cost — approved by controller [date]."</p></li>
+        <li><p>Attach any supporting documentation. Save.</p></li>
+      </ol>
+
+      <div class="warn-box"><strong>⚠ Never credit revenue or debit COGS without also moving the inventory asset.</strong> An unbalanced COGS entry will cause inventory values on the balance sheet to be incorrect.</div>
+    </div>
+
+    <!-- ══════════════ INV ADJUST ══════════════ -->
+    <div id="page-inv-adjust" class="page">
+      <div class="section-title">Inventory Adjustments in QBO <span class="pill pill-howto">How-To</span></div>
+      <p class="page-lead" style="margin-bottom:20px">Inventory adjustments are used when the physical count differs from QBO records (shrinkage, damage, count errors). All adjustments require controller approval.</p>
+
+      <div class="warn-box"><strong>⚠ Required Before Adjusting:</strong> You must have (1) a completed physical count sheet signed by the person who did the count, (2) comparison to QBO on-hand quantities, and (3) written controller approval specifying the approved variance to adjust.</div>
+
+      <div class="section-title" style="margin-top:16px">Adjusting Inventory Quantity</div>
+      <ol class="steps">
+        <li><p>From the left menu, go to <span class="qbo-path">Inventory</span> (or <span class="qbo-path">Products and Services</span> → <span class="qbo-path">Inventory</span>).</p></li>
+        <li><p>Click <span class="qbo-path">Adjust Quantity</span> (or <span class="qbo-path">+ New → Inventory Qty Adjustment</span>).</p></li>
+        <li><p>Set the <strong>Adjustment Date</strong> to the date the physical count was performed.</p></li>
+        <li><p>Select the <strong>Inventory Adjustment Account</strong> — this should be a dedicated account (e.g. "Inventory Shrinkage & Adjustments" or similar). Confirm the correct account with the controller. Do not use COGS directly.</p></li>
+        <li><p>For each item being adjusted: find the item in the list, and in the <em>New QTY on Hand</em> column, enter the correct quantity from the physical count. QBO will calculate the difference.</p></li>
+        <li><p>In the <strong>Memo</strong> field, note: the count date, who performed the count, and the controller approval reference.</p></li>
+        <li><p>Click <span class="qbo-path">Save and close</span>. The inventory asset and adjustment account will update automatically.</p></li>
+      </ol>
+
+      <div class="section-title">Adjusting for Damaged / Obsolete Inventory</div>
+      <ol class="steps">
+        <li><p>Follow the same steps above, reducing quantity to zero (or the salvageable amount) for damaged/obsolete items.</p></li>
+        <li><p>Use the <em>Inventory Write-Down</em> or <em>Inventory Obsolescence</em> account (confirm name with controller) — not the standard adjustment account.</p></li>
+        <li><p>Attach photos or written documentation of the damaged goods if available.</p></li>
+      </ol>
+
+      <div class="tip-box"><strong>Audit Trail:</strong> QBO keeps a log of all inventory adjustments. Do not attempt to delete or edit a posted adjustment — if an error was made, create a correcting entry and note the reason in the memo. Notify the controller of any corrections.</div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+  const pages = {
+    'home': { cat: 'Overview', title: 'Home', tag: 'Knowledge Base', tagClass: 'tag-both' },
+    'ap-policy': { cat: 'Accounts Payable', title: 'AP Policy', tag: 'Policy', tagClass: 'tag-policy' },
+    'ap-bills': { cat: 'Accounts Payable', title: 'Entering Vendor Bills', tag: 'How-To', tagClass: 'tag-howto' },
+    'ap-payments': { cat: 'Accounts Payable', title: 'Recording Bill Payments', tag: 'How-To', tagClass: 'tag-howto' },
+    'ap-credits': { cat: 'Accounts Payable', title: 'Vendor Credit Memos', tag: 'How-To', tagClass: 'tag-howto' },
+    'ap-aging': { cat: 'Accounts Payable', title: 'AP Aging Reports', tag: 'How-To', tagClass: 'tag-howto' },
+    'ar-policy': { cat: 'Accounts Receivable', title: 'AR Policy', tag: 'Policy', tagClass: 'tag-policy' },
+    'ar-invoices': { cat: 'Accounts Receivable', title: 'Processing Customer Invoices', tag: 'How-To', tagClass: 'tag-howto' },
+    'ar-payments': { cat: 'Accounts Receivable', title: 'Receiving Payments', tag: 'How-To', tagClass: 'tag-howto' },
+    'ar-credits': { cat: 'Accounts Receivable', title: 'Customer Credit Memos', tag: 'How-To', tagClass: 'tag-howto' },
+    'ar-aging': { cat: 'Accounts Receivable', title: 'AR Aging Reports', tag: 'How-To', tagClass: 'tag-howto' },
+    'ic-policy': { cat: 'Intercompany', title: 'Intercompany Policy', tag: 'Policy', tagClass: 'tag-policy' },
+    'ic-howto': { cat: 'Intercompany', title: 'Recording IC Transactions', tag: 'How-To', tagClass: 'tag-howto' },
+    'inv-policy': { cat: 'Inventory', title: 'Inventory Policy', tag: 'Policy', tagClass: 'tag-policy' },
+    'inv-po': { cat: 'Inventory', title: 'Purchase Orders & Receiving', tag: 'How-To', tagClass: 'tag-howto' },
+    'inv-cogs': { cat: 'Inventory', title: 'Recording COGS', tag: 'How-To', tagClass: 'tag-howto' },
+    'inv-adjust': { cat: 'Inventory', title: 'Inventory Adjustments', tag: 'How-To', tagClass: 'tag-howto' },
+  };
+
+  function show(id, el) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    // Show selected
+    document.getElementById('page-' + id).classList.add('active');
+
+    // Update topbar
+    const meta = pages[id];
+    document.getElementById('topbar-cat').textContent = meta.cat;
+    document.getElementById('topbar-title').textContent = meta.title;
+    const tag = document.getElementById('topbar-tag');
+    tag.textContent = meta.tag;
+    tag.className = 'tag ' + meta.tagClass;
+
+    // Activate nav item
+    if (el) {
+      el.classList.add('active');
+    } else {
+      // Find the nav item that matches
+      document.querySelectorAll('.nav-item').forEach(n => {
+        if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
+          n.classList.add('active');
+        }
+      });
+    }
+
+    // Scroll content to top
+    document.getElementById('content').scrollTop = 0;
+  }
+
+  function doSearch(val) {
+    const q = val.trim().toLowerCase();
+    const navItems = document.querySelectorAll('.nav-item');
+    if (!q) {
+      navItems.forEach(n => n.style.display = '');
+      document.querySelectorAll('.nav-section-label').forEach(l => l.style.display = '');
+      return;
+    }
+    navItems.forEach(n => {
+      const kw = (n.dataset.keywords || '') + ' ' + n.textContent.toLowerCase();
+      n.style.display = kw.includes(q) ? '' : 'none';
+    });
+    // Hide section labels if all children hidden
+    document.querySelectorAll('.nav-section').forEach(sec => {
+      const label = sec.querySelector('.nav-section-label');
+      const visible = [...sec.querySelectorAll('.nav-item')].some(n => n.style.display !== 'none');
+      if (label) label.style.display = visible ? '' : 'none';
+    });
+  }
+
+  // Home card clicks
+  document.querySelectorAll('.home-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const fn = this.getAttribute('onclick');
+      if (fn) eval(fn);
+    });
+  });
+</script>
+</body>
+</html>
