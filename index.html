@@ -418,19 +418,19 @@
     setTimeout(() => el.classList.remove('visible'), 2000);
   }
 
-  // ── PERSISTENT STORAGE ──
-  async function persist() {
+  // ── PERSISTENT STORAGE (localStorage) ──
+  function persist() {
     try {
-      await window.storage.set(STORAGE_KEY, JSON.stringify({ articles, articleIdCounter }));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ articles, articleIdCounter }));
       flashSaved();
     } catch(e) { console.warn('Storage write failed', e); }
   }
 
-  async function loadFromStorage() {
+  function loadFromStorage() {
     try {
-      const result = await window.storage.get(STORAGE_KEY);
-      if (!result || !result.value) return;
-      const data = JSON.parse(result.value);
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw);
       articles = data.articles || {};
       articleIdCounter = data.articleIdCounter || 1;
       const ids = Object.keys(articles);
@@ -443,7 +443,7 @@
           addNavItem(id);
         });
       }
-    } catch(e) { /* no saved data */ }
+    } catch(e) { console.warn('Storage read failed', e); }
   }
 
   // ── NAVIGATION ──
@@ -671,9 +671,8 @@
       document.getElementById('reader-overlay').style.display = 'none';
       document.getElementById('sidebar').style.display = '';
       document.getElementById('main').style.display = '';
-      loadFromStorage().then(() => {
-        if (val === ADMIN_PASSWORD) { isAuthenticated = true; enableEditMode(); }
-      });
+      loadFromStorage();
+      if (val === ADMIN_PASSWORD) { isAuthenticated = true; enableEditMode(); }
     } else {
       shakeEl('reader-card');
       document.getElementById('reader-error').textContent = 'Incorrect password. Please try again.';
