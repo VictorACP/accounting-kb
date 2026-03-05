@@ -406,6 +406,7 @@
   let articleIdCounter = 1;
   let isAuthenticated = false;
   let selectedType = '', selectedCat = '', selectedNoteType = 'tip';
+  let storageLoaded = false;
 
   // ── UTILITIES ──
   function formatDate(d) {
@@ -427,6 +428,8 @@
   }
 
   function loadFromStorage() {
+    if (storageLoaded) return;
+    storageLoaded = true;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
@@ -663,7 +666,7 @@
     setTimeout(() => document.getElementById('reader-pw').focus(), 150);
   });
 
-  document.getElementById('reader-pw').addEventListener('keydown', e => { if (e.key === 'Enter') submitReaderPassword(); });
+
 
   function submitReaderPassword() {
     const val = document.getElementById('reader-pw').value;
