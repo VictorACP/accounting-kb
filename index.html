@@ -33,7 +33,6 @@
     overflow: hidden;
   }
 
-  /* ── SIDEBAR ── */
   #sidebar {
     width: var(--sidebar-w);
     min-width: var(--sidebar-w);
@@ -45,883 +44,173 @@
     border-right: 3px solid var(--accent);
   }
 
-  .sidebar-header {
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-  }
+  .sidebar-header { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-logo { font-family: 'DM Serif Display', serif; font-size: 1.05rem; color: var(--gold); letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .sidebar-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; }
 
-  .sidebar-logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.05rem;
-    color: var(--gold);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-  }
-
-  .sidebar-sub {
-    font-size: 0.72rem;
-    color: rgba(255,255,255,0.45);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .search-wrap {
-    padding: 16px 16px 8px;
-  }
-
-  #search {
-    width: 100%;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 6px;
-    padding: 9px 14px;
-    color: #fff;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.78rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
+  .search-wrap { padding: 16px 16px 8px; }
+  #search { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; padding: 9px 14px; color: #fff; font-family: 'DM Mono', monospace; font-size: 0.78rem; outline: none; transition: border-color 0.2s; }
   #search::placeholder { color: rgba(255,255,255,0.3); }
   #search:focus { border-color: var(--gold); }
 
-  .nav-scroll {
-    flex: 1;
-    overflow-y: auto;
-    padding: 8px 0 24px;
-  }
-
+  .nav-scroll { flex: 1; overflow-y: auto; padding: 8px 0 24px; }
   .nav-scroll::-webkit-scrollbar { width: 3px; }
   .nav-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
 
-  .nav-section {
-    margin-top: 8px;
-  }
+  .nav-section { margin-top: 8px; }
+  .nav-section-label { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); padding: 10px 20px 6px; }
 
-  .nav-section-label {
-    font-size: 0.62rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    padding: 10px 20px 6px;
-  }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; cursor: pointer; font-size: 0.82rem; font-weight: 400; color: rgba(255,255,255,0.65); border-left: 3px solid transparent; transition: all 0.15s; line-height: 1.3; }
+  .nav-item:hover { background: rgba(255,255,255,0.05); color: #fff; border-left-color: rgba(255,255,255,0.2); }
+  .nav-item.active { background: rgba(200,75,49,0.15); color: #fff; border-left-color: var(--accent); font-weight: 500; }
 
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 20px;
-    cursor: pointer;
-    font-size: 0.82rem;
-    font-weight: 400;
-    color: rgba(255,255,255,0.65);
-    border-left: 3px solid transparent;
-    transition: all 0.15s;
-    line-height: 1.3;
-  }
-
-  .nav-item:hover {
-    background: rgba(255,255,255,0.05);
-    color: #fff;
-    border-left-color: rgba(255,255,255,0.2);
-  }
-
-  .nav-item.active {
-    background: rgba(200,75,49,0.15);
-    color: #fff;
-    border-left-color: var(--accent);
-    font-weight: 500;
-  }
-
-  .nav-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    opacity: 0.5;
-  }
-
+  .nav-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; opacity: 0.5; }
   .nav-item.active .nav-dot { opacity: 1; }
   .dot-red { background: var(--accent); }
   .dot-gold { background: var(--gold); }
   .dot-teal { background: #4ab8a5; }
   .dot-blue { background: #6a8ccc; }
 
-  /* ── MAIN ── */
-  #main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
+  #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-  #topbar {
-    background: var(--paper);
-    border-bottom: 1px solid var(--rule);
-    padding: 18px 40px;
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    flex-shrink: 0;
-  }
-
-  .topbar-category {
-    font-size: 0.7rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: var(--accent);
-  }
-
+  #topbar { background: var(--paper); border-bottom: 1px solid var(--rule); padding: 18px 40px; display: flex; align-items: baseline; gap: 16px; flex-shrink: 0; }
+  .topbar-category { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--accent); }
   .topbar-slash { color: var(--rule); font-size: 1.2rem; }
+  .topbar-title { font-family: 'DM Serif Display', serif; font-size: 1.45rem; color: var(--ink); }
 
-  .topbar-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.45rem;
-    color: var(--ink);
-  }
-
-  .tag {
-    margin-left: auto;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 20px;
-  }
-
+  .tag { margin-left: auto; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
   .tag-policy { background: var(--gold-soft); color: var(--gold); }
   .tag-howto { background: var(--teal-soft); color: var(--teal); }
   .tag-both { background: var(--accent-soft); color: var(--accent); }
 
-  #content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 36px 40px 60px;
-  }
-
+  #content { flex: 1; overflow-y: auto; padding: 36px 40px 60px; }
   #content::-webkit-scrollbar { width: 4px; }
   #content::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 2px; }
 
-  /* ── CONTENT ELEMENTS ── */
   .page { display: none; animation: fadeIn 0.2s ease; }
   .page.active { display: block; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-  .intro-block {
-    background: var(--ink);
-    color: #fff;
-    border-radius: 10px;
-    padding: 28px 32px;
-    margin-bottom: 32px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .intro-block::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: rgba(200,75,49,0.15);
-  }
-
-  .intro-block p {
-    font-size: 0.92rem;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.8);
-    max-width: 680px;
-  }
-
+  .intro-block { background: var(--ink); color: #fff; border-radius: 10px; padding: 28px 32px; margin-bottom: 32px; position: relative; overflow: hidden; }
+  .intro-block::before { content: ''; position: absolute; top: -30px; right: -30px; width: 120px; height: 120px; border-radius: 50%; background: rgba(200,75,49,0.15); }
+  .intro-block p { font-size: 0.92rem; line-height: 1.75; color: rgba(255,255,255,0.8); max-width: 680px; }
   .intro-block strong { color: var(--gold); font-weight: 500; }
 
-  .section-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.15rem;
-    color: var(--ink);
-    margin: 32px 0 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .section-title .pill {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--ink); margin: 32px 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--rule); display: flex; align-items: center; gap: 10px; }
+  .section-title .pill { font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
   .pill-policy { background: var(--gold-soft); color: var(--gold); }
   .pill-howto { background: var(--teal-soft); color: var(--teal); }
 
-  .policy-box {
-    background: var(--gold-soft);
-    border: 1px solid #e0d0a0;
-    border-left: 4px solid var(--gold);
-    border-radius: 6px;
-    padding: 18px 22px;
-    margin-bottom: 16px;
-  }
-
-  .policy-box h4 {
-    font-size: 0.78rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 8px;
-  }
-
-  .policy-box p, .policy-box li {
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: var(--ink);
-  }
-
+  .policy-box { background: var(--gold-soft); border: 1px solid #e0d0a0; border-left: 4px solid var(--gold); border-radius: 6px; padding: 18px 22px; margin-bottom: 16px; }
+  .policy-box h4 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .policy-box p, .policy-box li { font-size: 0.875rem; line-height: 1.7; color: var(--ink); }
   .policy-box ul { padding-left: 18px; }
   .policy-box li { margin-bottom: 4px; }
 
-  .warn-box {
-    background: #fff5f3;
-    border: 1px solid #f5cfc8;
-    border-left: 4px solid var(--accent);
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin-bottom: 16px;
-    font-size: 0.84rem;
-    line-height: 1.65;
-    color: var(--ink);
-  }
-
+  .warn-box { background: #fff5f3; border: 1px solid #f5cfc8; border-left: 4px solid var(--accent); border-radius: 6px; padding: 14px 18px; margin-bottom: 16px; font-size: 0.84rem; line-height: 1.65; color: var(--ink); }
   .warn-box strong { color: var(--accent); }
 
-  .steps {
-    counter-reset: step;
-    list-style: none;
-    margin-bottom: 16px;
-  }
-
-  .steps li {
-    counter-increment: step;
-    display: flex;
-    gap: 16px;
-    margin-bottom: 14px;
-    align-items: flex-start;
-  }
-
-  .steps li::before {
-    content: counter(step);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    min-width: 26px;
-    background: var(--teal);
-    color: #fff;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    border-radius: 50%;
-    margin-top: 1px;
-  }
-
-  .steps li p {
-    font-size: 0.875rem;
-    line-height: 1.7;
-    color: var(--ink);
-  }
-
-  .steps li p strong {
-    font-weight: 600;
-    color: var(--teal);
-  }
-
-  .qbo-path {
-    display: inline-block;
-    background: #eef3fb;
-    border: 1px solid #c8d8f0;
-    border-radius: 4px;
-    padding: 2px 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: #3a5a9a;
-    margin: 1px 0;
-  }
-
-  .tip-box {
-    background: var(--teal-soft);
-    border: 1px solid #b0ddd5;
-    border-left: 4px solid var(--teal);
-    border-radius: 6px;
-    padding: 14px 18px;
-    margin: 16px 0;
-    font-size: 0.84rem;
-    line-height: 1.65;
-    color: var(--ink);
-  }
-
+  .tip-box { background: var(--teal-soft); border: 1px solid #b0ddd5; border-left: 4px solid var(--teal); border-radius: 6px; padding: 14px 18px; margin: 16px 0; font-size: 0.84rem; line-height: 1.65; color: var(--ink); }
   .tip-box strong { color: var(--teal); }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    font-size: 0.84rem;
-  }
-
-  th {
-    background: var(--ink);
-    color: #fff;
-    padding: 10px 14px;
-    text-align: left;
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-  }
-
-  td {
-    padding: 10px 14px;
-    border-bottom: 1px solid var(--rule);
-    vertical-align: top;
-    line-height: 1.55;
-    color: var(--ink);
-  }
-
+  table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.84rem; }
+  th { background: var(--ink); color: #fff; padding: 10px 14px; text-align: left; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.55; color: var(--ink); }
   tr:nth-child(even) td { background: var(--paper-warm); }
 
-  .badge {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 2px 7px;
-    border-radius: 3px;
-    margin-left: 4px;
-  }
-
-  .badge-required { background: #fde8e5; color: var(--accent); }
-  .badge-optional { background: var(--teal-soft); color: var(--teal); }
-
-  .two-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-
-  /* ── HOME PAGE ── */
-  .home-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .home-card {
-    background: #fff;
-    border: 1px solid var(--rule);
-    border-radius: 8px;
-    padding: 22px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border-top: 3px solid var(--rule);
-  }
-
-  .home-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-    transform: translateY(-2px);
-  }
-
-  .home-card.red { border-top-color: var(--accent); }
-  .home-card.gold { border-top-color: var(--gold); }
-  .home-card.teal { border-top-color: var(--teal); }
-  .home-card.blue { border-top-color: #6a8ccc; }
-
-  .home-card-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .home-card.red .home-card-label { color: var(--accent); }
-  .home-card.gold .home-card-label { color: var(--gold); }
-  .home-card.teal .home-card-label { color: var(--teal); }
-  .home-card.blue .home-card-label { color: #6a8ccc; }
-
-  .home-card h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 8px;
-    color: var(--ink);
-  }
-
-  .home-card p {
-    font-size: 0.8rem;
-    color: var(--ink-light);
-    line-height: 1.6;
-  }
-
-  .home-card-count {
-    margin-top: 14px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--ink-faint);
-  }
-
-  hr.divider {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 28px 0;
-  }
-
-  h2.page-h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.3rem;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-
-  .page-lead {
-    font-size: 0.88rem;
-    color: var(--ink-light);
-    line-height: 1.7;
-    max-width: 680px;
-    margin-bottom: 8px;
-  }
-
-  /* Search highlight */
-  .highlight { background: #fffacd; border-radius: 2px; }
-
-  /* Accordion */
-  .accordion { margin-bottom: 10px; border: 1px solid var(--rule); border-radius: 7px; overflow: hidden; }
-  .accordion-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    cursor: pointer;
-    background: #fff;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink);
-    transition: background 0.15s;
-    user-select: none;
-  }
-  .accordion-header:hover { background: var(--paper-warm); }
-  .accordion-arrow { transition: transform 0.2s; color: var(--ink-faint); font-size: 0.8rem; }
-  .accordion.open .accordion-arrow { transform: rotate(180deg); }
-  .accordion-body { display: none; padding: 16px 18px 18px; border-top: 1px solid var(--rule); background: var(--paper); }
-  .accordion.open .accordion-body { display: block; }
-
-  /* ── ADMIN / EDIT ── */
-  #admin-btn {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 9px 20px;
-    border-radius: 7px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    box-shadow: 0 2px 8px rgba(200,75,49,0.25);
-    transition: all 0.15s;
-  }
-  #admin-btn:hover { background: #a83a22; box-shadow: 0 4px 14px rgba(200,75,49,0.35); transform: translateY(-1px); }
-  #admin-btn.authenticated { background: var(--teal); box-shadow: 0 2px 8px rgba(42,125,110,0.25); }
-  #admin-btn.authenticated:hover { background: #1f5e52; }
-  #admin-btn .lock-icon { font-size: 0.9rem; }
-
-  /* Modal overlay */
-  #modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(26,26,46,0.55);
-    backdrop-filter: blur(3px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-  }
-  #modal-overlay.visible { display: flex; }
-
-  #modal {
-    background: var(--paper);
-    border-radius: 12px;
-    padding: 36px 36px 28px;
-    width: 380px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    border-top: 4px solid var(--accent);
-    animation: modalIn 0.2s ease;
-  }
-
-  @keyframes modalIn { from { opacity:0; transform: translateY(-12px) scale(0.97); } to { opacity:1; transform: translateY(0) scale(1); } }
-
-  #modal h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.2rem;
-    color: var(--ink);
-    margin-bottom: 6px;
-  }
-
-  #modal p {
-    font-size: 0.82rem;
-    color: var(--ink-light);
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  #modal-pw-wrap {
-    position: relative;
-    margin-bottom: 10px;
-  }
-
-  #modal-pw {
-    width: 100%;
-    padding: 11px 14px;
-    border: 1.5px solid var(--rule);
-    border-radius: 7px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.88rem;
-    color: var(--ink);
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s;
-    letter-spacing: 0.1em;
-  }
-  #modal-pw:focus { border-color: var(--accent); }
-  #modal-pw.error { border-color: var(--accent); background: #fff8f7; }
-
-  #modal-error {
-    font-size: 0.75rem;
-    color: var(--accent);
-    min-height: 18px;
-    margin-bottom: 16px;
-    font-weight: 500;
-  }
-
-  .modal-btns {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-
-  .modal-btn-cancel {
-    padding: 9px 18px;
-    border-radius: 6px;
-    border: 1.5px solid var(--rule);
-    background: transparent;
-    color: var(--ink-light);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .modal-btn-cancel:hover { background: var(--paper-warm); }
-
-  .modal-btn-submit {
-    padding: 9px 22px;
-    border-radius: 6px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .modal-btn-submit:hover { background: #a83a22; }
-
-  /* Edit bar shown when authenticated */
-  #edit-bar {
-    display: none;
-    background: var(--teal-soft);
-    border-bottom: 1px solid #b0ddd5;
-    padding: 10px 40px;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-  #edit-bar.visible { display: flex; }
-
-  .edit-bar-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--teal);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-
-  .edit-bar-hint {
-    font-size: 0.78rem;
-    color: var(--ink-light);
-  }
-
-  #btn-add-section {
-    margin-left: auto;
-    padding: 7px 16px;
-    border-radius: 6px;
-    border: 1.5px solid var(--teal);
-    background: var(--teal);
-    color: #fff;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  #btn-add-section:hover { background: #1f5e52; border-color: #1f5e52; }
-
-  #btn-lock {
-    padding: 7px 14px;
-    border-radius: 6px;
-    border: 1.5px solid #b0ddd5;
-    background: transparent;
-    color: var(--teal);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  #btn-lock:hover { background: #fff; }
-
-  /* Editable content styles */
-  [contenteditable="true"] {
-    outline: 2px dashed #4ab8a5;
-    border-radius: 4px;
-    padding: 2px 4px;
-    cursor: text;
-    transition: outline 0.15s;
-  }
-  [contenteditable="true"]:focus {
-    outline: 2px solid var(--teal);
-    background: #f0faf8;
-  }
-
-  .edit-delete-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    cursor: pointer;
-    margin-left: 8px;
-    vertical-align: middle;
-    border: none;
-    transition: background 0.15s;
-    flex-shrink: 0;
-  }
-  .edit-delete-btn:hover { background: #a83a22; }
-
-  /* Add note modal */
-  #note-modal {
-    background: var(--paper);
-    border-radius: 12px;
-    padding: 32px;
-    width: 480px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    border-top: 4px solid var(--teal);
-    animation: modalIn 0.2s ease;
-  }
-
-  #note-modal h3 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem;
-    margin-bottom: 16px;
-    color: var(--ink);
-  }
-
-  .note-field-label {
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 5px;
-    margin-top: 12px;
-  }
-
-  .note-field {
-    width: 100%;
-    padding: 9px 12px;
-    border: 1.5px solid var(--rule);
-    border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.85rem;
-    color: var(--ink);
-    background: #fff;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .note-field:focus { border-color: var(--teal); }
-
-  textarea.note-field { resize: vertical; min-height: 90px; line-height: 1.6; }
-
-  .note-type-btns {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 4px;
-  }
-
-  .note-type-btn {
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1.5px solid var(--rule);
-    background: #fff;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-    color: var(--ink-light);
-  }
-  .note-type-btn.selected { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
-  .note-type-btn.selected.warn { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-  .note-type-btn.selected.policy { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
-
-  /* Article creation toggles */
-  .art-toggle {
-    padding: 12px 10px;
-    border-radius: 8px;
-    border: 2px solid var(--rule);
-    background: #fff;
-    cursor: pointer;
-    text-align: center;
-    color: var(--ink);
-    transition: all 0.15s;
-    line-height: 1.5;
-  }
-  .art-toggle:hover { border-color: var(--ink-faint); background: var(--paper-warm); }
-  .art-toggle.selected-type { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
-  .art-toggle.selected-cat { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
-
-  /* Article page metadata bar */
-  .article-meta {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 10px 0 20px;
-    border-bottom: 1px solid var(--rule);
-    margin-bottom: 24px;
-    font-size: 0.75rem;
-    color: var(--ink-faint);
-    flex-wrap: wrap;
-  }
-  .article-meta .meta-badge {
-    font-weight: 600;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    font-size: 0.65rem;
-    padding: 3px 9px;
-    border-radius: 4px;
-  }
+  .article-meta { display: flex; align-items: center; gap: 16px; padding: 10px 0 20px; border-bottom: 1px solid var(--rule); margin-bottom: 24px; font-size: 0.75rem; color: var(--ink-faint); flex-wrap: wrap; }
+  .article-meta .meta-badge { font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; font-size: 0.65rem; padding: 3px 9px; border-radius: 4px; }
   .article-meta .meta-date { font-family: 'DM Mono', monospace; }
-  .article-body-content {
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: var(--ink);
-  }
+  .article-body-content { font-size: 0.9rem; line-height: 1.8; color: var(--ink); }
   .article-body-content h2 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin: 20px 0 8px; color: var(--ink); border-bottom: 1px solid var(--rule); padding-bottom: 4px; }
   .article-body-content h3 { font-size: 0.9rem; font-weight: 600; margin: 16px 0 4px; color: var(--ink); }
   .article-body-content ul, .article-body-content ol { padding-left: 22px; margin: 8px 0; }
   .article-body-content li { margin-bottom: 4px; }
   .article-body-content blockquote { background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: 4px; padding: 12px 16px; margin: 12px 0; }
-  .article-edit-btn {
-    margin-left: auto;
-    padding: 5px 14px;
-    border-radius: 6px;
-    border: 1.5px solid var(--rule);
-    background: transparent;
-    color: var(--ink-light);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s;
-    display: none;
+
+  .article-edit-btn, .article-delete-btn {
+    padding: 5px 14px; border-radius: 6px; border: 1.5px solid var(--rule); background: transparent;
+    color: var(--ink-light); font-family: 'DM Sans', sans-serif; font-size: 0.75rem; font-weight: 500;
+    cursor: pointer; transition: all 0.15s; display: none;
   }
   .article-edit-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-  body.edit-active .article-edit-btn { display: inline-block; }
+  .article-delete-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+  body.edit-active .article-edit-btn, body.edit-active .article-delete-btn { display: inline-block; }
 
-  /* ── RICH TEXT EDITOR ── */
-  #rte-toolbar {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    background: var(--paper-warm);
-    border: 1.5px solid var(--rule);
-    border-bottom: none;
-    border-radius: 6px 6px 0 0;
-    padding: 6px 8px;
-    flex-wrap: wrap;
-  }
-  .rte-btn {
-    padding: 4px 9px;
-    border: 1px solid transparent;
-    background: transparent;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.78rem;
-    color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
-    line-height: 1.4;
-    transition: all 0.12s;
-    min-width: 28px;
-    text-align: center;
-  }
+  #admin-btn { margin-left: auto; display: flex; align-items: center; gap: 8px; padding: 9px 20px; border-radius: 7px; border: none; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; letter-spacing: 0.02em; box-shadow: 0 2px 8px rgba(200,75,49,0.25); transition: all 0.15s; }
+  #admin-btn:hover { background: #a83a22; box-shadow: 0 4px 14px rgba(200,75,49,0.35); transform: translateY(-1px); }
+  #admin-btn.authenticated { background: var(--teal); box-shadow: 0 2px 8px rgba(42,125,110,0.25); }
+  #admin-btn.authenticated:hover { background: #1f5e52; }
+  #admin-btn .lock-icon { font-size: 0.9rem; }
+
+  #modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,26,46,0.55); backdrop-filter: blur(3px); z-index: 1000; align-items: center; justify-content: center; }
+  #modal-overlay.visible { display: flex; }
+
+  #modal { background: var(--paper); border-radius: 12px; padding: 36px 36px 28px; width: 380px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); border-top: 4px solid var(--accent); animation: modalIn 0.2s ease; }
+  @keyframes modalIn { from { opacity:0; transform: translateY(-12px) scale(0.97); } to { opacity:1; transform: translateY(0) scale(1); } }
+  #modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: var(--ink); margin-bottom: 6px; }
+  #modal p { font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; margin-bottom: 20px; }
+  #modal-pw { width: 100%; padding: 11px 14px; border: 1.5px solid var(--rule); border-radius: 7px; font-family: 'DM Mono', monospace; font-size: 0.88rem; color: var(--ink); background: #fff; outline: none; transition: border-color 0.2s; letter-spacing: 0.1em; }
+  #modal-pw:focus { border-color: var(--accent); }
+  #modal-pw.error { border-color: var(--accent); background: #fff8f7; }
+  #modal-error { font-size: 0.75rem; color: var(--accent); min-height: 18px; margin-bottom: 16px; font-weight: 500; margin-top: 8px; }
+
+  .modal-btns { display: flex; gap: 10px; justify-content: flex-end; }
+  .modal-btn-cancel { padding: 9px 18px; border-radius: 6px; border: 1.5px solid var(--rule); background: transparent; color: var(--ink-light); font-family: 'DM Sans', sans-serif; font-size: 0.82rem; cursor: pointer; transition: all 0.15s; }
+  .modal-btn-cancel:hover { background: var(--paper-warm); }
+  .modal-btn-submit { padding: 9px 22px; border-radius: 6px; border: none; background: var(--accent); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  .modal-btn-submit:hover { background: #a83a22; }
+
+  #edit-bar { display: none; background: var(--teal-soft); border-bottom: 1px solid #b0ddd5; padding: 10px 40px; align-items: center; gap: 12px; flex-shrink: 0; }
+  #edit-bar.visible { display: flex; }
+  .edit-bar-label { font-size: 0.75rem; font-weight: 600; color: var(--teal); letter-spacing: 0.06em; text-transform: uppercase; }
+  .edit-bar-hint { font-size: 0.78rem; color: var(--ink-light); }
+  #btn-add-section { margin-left: auto; padding: 7px 16px; border-radius: 6px; border: 1.5px solid var(--teal); background: var(--teal); color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+  #btn-add-section:hover { background: #1f5e52; border-color: #1f5e52; }
+  #btn-lock { padding: 7px 14px; border-radius: 6px; border: 1.5px solid #b0ddd5; background: transparent; color: var(--teal); font-family: 'DM Sans', sans-serif; font-size: 0.78rem; cursor: pointer; transition: all 0.15s; }
+  #btn-lock:hover { background: #fff; }
+
+  [contenteditable="true"] { outline: 2px dashed #4ab8a5; border-radius: 4px; padding: 2px 4px; cursor: text; transition: outline 0.15s; }
+  [contenteditable="true"]:focus { outline: 2px solid var(--teal); background: #f0faf8; }
+
+  .edit-delete-btn { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 0.7rem; font-weight: 700; cursor: pointer; margin-left: 8px; vertical-align: middle; border: none; transition: background 0.15s; flex-shrink: 0; }
+  .edit-delete-btn:hover { background: #a83a22; }
+
+  .note-field-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-light); margin-bottom: 5px; margin-top: 12px; }
+  .note-field { width: 100%; padding: 9px 12px; border: 1.5px solid var(--rule); border-radius: 6px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; color: var(--ink); background: #fff; outline: none; transition: border-color 0.2s; }
+  .note-field:focus { border-color: var(--teal); }
+  textarea.note-field { resize: vertical; min-height: 90px; line-height: 1.6; }
+  .note-type-btns { display: flex; gap: 8px; margin-bottom: 4px; }
+  .note-type-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--rule); background: #fff; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.15s; color: var(--ink-light); }
+  .note-type-btn.selected { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
+  .note-type-btn.selected.warn { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .note-type-btn.selected.policy { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); }
+
+  #note-modal { background: var(--paper); border-radius: 12px; padding: 32px; width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.2); border-top: 4px solid var(--teal); animation: modalIn 0.2s ease; }
+  #note-modal h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin-bottom: 16px; color: var(--ink); }
+
+  .art-toggle { padding: 12px 10px; border-radius: 8px; border: 2px solid var(--rule); background: #fff; cursor: pointer; text-align: center; color: var(--ink); transition: all 0.15s; line-height: 1.5; }
+  .art-toggle:hover { border-color: var(--ink-faint); background: var(--paper-warm); }
+  .art-toggle.selected-type { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+  .art-toggle.selected-cat { border-color: var(--teal); background: var(--teal-soft); color: var(--teal); }
+
+  #rte-toolbar { display: flex; align-items: center; gap: 2px; background: var(--paper-warm); border: 1.5px solid var(--rule); border-bottom: none; border-radius: 6px 6px 0 0; padding: 6px 8px; flex-wrap: wrap; }
+  .rte-btn { padding: 4px 9px; border: 1px solid transparent; background: transparent; border-radius: 4px; cursor: pointer; font-size: 0.78rem; color: var(--ink); font-family: 'DM Sans', sans-serif; line-height: 1.4; transition: all 0.12s; min-width: 28px; text-align: center; }
   .rte-btn:hover { background: #fff; border-color: var(--rule); color: var(--accent); }
   .rte-btn.rte-active { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
   .rte-divider { width: 1px; height: 18px; background: var(--rule); margin: 0 4px; flex-shrink: 0; }
-  .rte-editor {
-    min-height: 180px;
-    max-height: 340px;
-    overflow-y: auto;
-    border-radius: 0 0 6px 6px !important;
-    padding: 12px 14px !important;
-    line-height: 1.75;
-    font-size: 0.88rem;
-    outline: none;
-    cursor: text;
-    white-space: normal;
-  }
-  .rte-editor:empty::before {
-    content: attr(placeholder);
-    color: var(--ink-faint);
-    pointer-events: none;
-    display: block;
-  }
+  .rte-editor { min-height: 180px; max-height: 340px; overflow-y: auto; border-radius: 0 0 6px 6px !important; padding: 12px 14px !important; line-height: 1.75; font-size: 0.88rem; outline: none; cursor: text; white-space: normal; }
+  .rte-editor:empty::before { content: attr(placeholder); color: var(--ink-faint); pointer-events: none; display: block; }
   .rte-editor:focus { border-color: var(--teal) !important; }
-  .rte-editor h2 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin: 14px 0 6px; color: var(--ink); }
-  .rte-editor h3 { font-size: 0.9rem; font-weight: 600; margin: 12px 0 4px; color: var(--ink); }
+  .rte-editor h2 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; margin: 14px 0 6px; }
+  .rte-editor h3 { font-size: 0.9rem; font-weight: 600; margin: 12px 0 4px; }
   .rte-editor ul, .rte-editor ol { padding-left: 22px; margin: 6px 0; }
   .rte-editor li { margin-bottom: 3px; }
   .rte-editor blockquote { background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: 4px; padding: 10px 14px; margin: 10px 0; font-style: normal; color: var(--ink); }
+
+  #save-indicator { font-size: 0.7rem; color: var(--teal); font-family: 'DM Mono', monospace; opacity: 0; transition: opacity 0.4s; white-space: nowrap; }
+  #save-indicator.visible { opacity: 1; }
 </style>
 </head>
 <body>
@@ -974,6 +263,7 @@
     <span class="topbar-slash">/</span>
     <span class="topbar-title" id="topbar-title">Home</span>
     <span class="tag tag-both" id="topbar-tag">Knowledge Base</span>
+    <span id="save-indicator">✓ Saved</span>
     <button id="admin-btn" onclick="handleAdminBtn()">
       <span class="lock-icon">✏️</span>
       <span id="admin-btn-label">Add / Edit Article</span>
@@ -981,37 +271,32 @@
   </div>
   <div id="edit-bar">
     <span class="edit-bar-label">✏️ Edit Mode Active</span>
-    <span class="edit-bar-hint">Click any text to edit it directly. Use the button to add new notes.</span>
+    <span class="edit-bar-hint">Click any text to edit. Use the button to add new articles.</span>
     <button id="btn-add-section" onclick="openNewArticleModal()">+ New Article</button>
     <button id="btn-lock" onclick="lockSession()">🔒 Lock</button>
   </div>
 
   <div id="content">
-
-    <!-- ══════════════ HOME ══════════════ -->
     <div id="page-home" class="page active">
       <div class="intro-block">
         <p>Welcome to the <strong>Portfolio Accounting Knowledge Base</strong>. Use this as your single source of truth for accounting policies and QBO how-tos across portfolio companies. Articles you add will appear in the sidebar for easy navigation.</p>
       </div>
-
-      <div id="empty-state" style="margin-top: 48px; text-align: center; padding: 60px 40px; border: 2px dashed var(--rule); border-radius: 12px; background: #fff;">
-        <div style="font-size: 2.5rem; margin-bottom: 16px;">📂</div>
-        <h2 style="font-family: 'DM Serif Display', serif; font-size: 1.3rem; color: var(--ink); margin-bottom: 10px;">No articles yet</h2>
-        <p style="font-size: 0.88rem; color: var(--ink-light); max-width: 400px; margin: 0 auto 24px; line-height: 1.7;">Click <strong>Add / Edit Article</strong> in the top right to create your first policy or how-to guide. Articles will appear in the sidebar once added.</p>
-        <button onclick="openNewArticleModal()" style="padding: 10px 24px; background: var(--accent); color: #fff; border: none; border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='#a83a22'" onmouseout="this.style.background='var(--accent)'">✏️ Add Your First Article</button>
+      <div id="empty-state" style="margin-top:48px;text-align:center;padding:60px 40px;border:2px dashed var(--rule);border-radius:12px;background:#fff;">
+        <div style="font-size:2.5rem;margin-bottom:16px;">📂</div>
+        <h2 style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);margin-bottom:10px;">No articles yet</h2>
+        <p style="font-size:0.88rem;color:var(--ink-light);max-width:400px;margin:0 auto 24px;line-height:1.7;">Click <strong>Add / Edit Article</strong> in the top right to create your first policy or how-to guide.</p>
+        <button onclick="openNewArticleModal()" style="padding:10px 24px;background:var(--accent);color:#fff;border:none;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;" onmouseover="this.style.background='#a83a22'" onmouseout="this.style.background='var(--accent)'">✏️ Add Your First Article</button>
       </div>
     </div>
-
     <div id="dynamic-pages"></div>
-
-  </div><!-- /content -->
-</div><!-- /main -->
+  </div>
+</div>
 
 <!-- PASSWORD MODAL -->
 <div id="modal-overlay" onclick="handleOverlayClick(event)">
   <div id="modal">
     <h3>🔒 Controller Access</h3>
-    <p>Enter the admin password to unlock <strong>Add / Edit Article</strong> mode. Once unlocked, you can edit existing content directly and add new notes to any page.</p>
+    <p>Enter the admin password to unlock <strong>Add / Edit Article</strong> mode.</p>
     <div id="modal-pw-wrap">
       <input id="modal-pw" type="password" placeholder="Enter password…" onkeydown="if(event.key==='Enter')submitPassword()">
     </div>
@@ -1023,19 +308,18 @@
   </div>
 </div>
 
-<!-- NEW ARTICLE MODAL -->
+<!-- NEW / EDIT ARTICLE MODAL -->
 <div id="article-overlay" onclick="handleArticleOverlayClick(event)" style="display:none;position:fixed;inset:0;background:rgba(26,26,46,0.6);backdrop-filter:blur(4px);z-index:1100;align-items:center;justify-content:center;overflow-y:auto;padding:24px 0;">
   <div id="article-modal" style="background:var(--paper);border-radius:14px;padding:36px 36px 28px;width:560px;max-width:94vw;box-shadow:0 24px 80px rgba(0,0,0,0.25);border-top:4px solid var(--accent);animation:modalIn 0.2s ease;position:relative;">
     <h3 id="article-modal-title" style="font-family:'DM Serif Display',serif;font-size:1.25rem;color:var(--ink);margin-bottom:6px;">New Article</h3>
     <p style="font-size:0.8rem;color:var(--ink-faint);margin-bottom:24px;">All fields are required.</p>
 
-    <!-- Article Type -->
     <div class="note-field-label">Article Type</div>
     <div style="display:flex;gap:10px;margin-bottom:4px;" id="type-btns">
       <button class="art-toggle" data-val="policy" onclick="selectArticleType(this)" style="flex:1;">
         <span style="font-size:1.1rem;">📋</span><br>
         <span style="font-weight:600;font-size:0.82rem;">Policy</span><br>
-        <span style="font-size:0.72rem;opacity:0.7;">Rules & standards</span>
+        <span style="font-size:0.72rem;opacity:0.7;">Rules &amp; standards</span>
       </button>
       <button class="art-toggle" data-val="howto" onclick="selectArticleType(this)" style="flex:1;">
         <span style="font-size:1.1rem;">🖱️</span><br>
@@ -1045,30 +329,19 @@
     </div>
     <div id="type-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:8px;"></div>
 
-    <!-- Category -->
     <div class="note-field-label">Category</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;" id="cat-btns">
-      <button class="art-toggle" data-val="ap" onclick="selectArticleCat(this)">
-        <span style="font-size:1rem;">🧾</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Payable</span>
-      </button>
-      <button class="art-toggle" data-val="ar" onclick="selectArticleCat(this)">
-        <span style="font-size:1rem;">💰</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Receivable</span>
-      </button>
-      <button class="art-toggle" data-val="inv" onclick="selectArticleCat(this)">
-        <span style="font-size:1rem;">📦</span> <span style="font-weight:600;font-size:0.82rem;">Inventory</span>
-      </button>
-      <button class="art-toggle" data-val="ic" onclick="selectArticleCat(this)">
-        <span style="font-size:1rem;">🔁</span> <span style="font-weight:600;font-size:0.82rem;">Intercompany</span>
-      </button>
+      <button class="art-toggle" data-val="ap" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🧾</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Payable</span></button>
+      <button class="art-toggle" data-val="ar" onclick="selectArticleCat(this)"><span style="font-size:1rem;">💰</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Receivable</span></button>
+      <button class="art-toggle" data-val="inv" onclick="selectArticleCat(this)"><span style="font-size:1rem;">📦</span> <span style="font-weight:600;font-size:0.82rem;">Inventory</span></button>
+      <button class="art-toggle" data-val="ic" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🔁</span> <span style="font-weight:600;font-size:0.82rem;">Intercompany</span></button>
     </div>
     <div id="cat-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:8px;"></div>
 
-    <!-- Title -->
     <div class="note-field-label">Article Title</div>
     <input class="note-field" id="article-title-input" type="text" placeholder="e.g. Entering Vendor Bills" style="margin-bottom:4px;">
     <div id="title-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:8px;"></div>
 
-    <!-- Body -->
     <div class="note-field-label">Article Content</div>
     <div id="rte-toolbar">
       <button type="button" class="rte-btn" onclick="rteCmd('bold')" title="Bold"><b>B</b></button>
@@ -1117,33 +390,69 @@
 </div>
 
 <script>
-  // ── PAGE REGISTRY ──
-  const pages = {
-    'home': { cat: 'Overview', title: 'Home', tag: 'Knowledge Base', tagClass: 'tag-both' },
-  };
-
-  // ── ARTICLE STORE (in-memory) ──
-  let articles = {}; // keyed by id
-  let articleIdCounter = 1;
-
-  const CAT_LABELS = { ap: 'Accounts Payable', ar: 'Accounts Receivable', inv: 'Inventory', ic: 'Intercompany' };
-  const CAT_DOTS   = { ap: 'dot-red', ar: 'dot-gold', inv: 'dot-teal', ic: 'dot-blue' };
+  // ── CONSTANTS ──
+  const STORAGE_KEY = 'kb-articles-v1';
+  const CAT_LABELS  = { ap: 'Accounts Payable', ar: 'Accounts Receivable', inv: 'Inventory', ic: 'Intercompany' };
+  const CAT_DOTS    = { ap: 'dot-red', ar: 'dot-gold', inv: 'dot-teal', ic: 'dot-blue' };
   const TYPE_LABELS = { policy: 'Policy', howto: 'How-To' };
   const TYPE_TAG    = { policy: 'tag-policy', howto: 'tag-howto' };
 
+  const READER_PASSWORD = 'Accountingis#1!';
+  const ADMIN_PASSWORD  = '5801Edwards';
+
+  // ── STATE ──
+  const pages = { 'home': { cat: 'Overview', title: 'Home', tag: 'Knowledge Base', tagClass: 'tag-both' } };
+  let articles = {};
+  let articleIdCounter = 1;
+  let isAuthenticated = false;
+  let selectedType = '', selectedCat = '', selectedNoteType = 'tip';
+
+  // ── UTILITIES ──
   function formatDate(d) {
-    return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    return new Date(d).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
   }
 
-  // ── SHOW PAGE ──
+  function flashSaved() {
+    const el = document.getElementById('save-indicator');
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 2000);
+  }
+
+  // ── PERSISTENT STORAGE ──
+  async function persist() {
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify({ articles, articleIdCounter }));
+      flashSaved();
+    } catch(e) { console.warn('Storage write failed', e); }
+  }
+
+  async function loadFromStorage() {
+    try {
+      const result = await window.storage.get(STORAGE_KEY);
+      if (!result || !result.value) return;
+      const data = JSON.parse(result.value);
+      articles = data.articles || {};
+      articleIdCounter = data.articleIdCounter || 1;
+      const ids = Object.keys(articles);
+      if (ids.length > 0) {
+        document.getElementById('empty-state').style.display = 'none';
+        ids.forEach(id => {
+          const art = articles[id];
+          pages[id] = { cat: CAT_LABELS[art.cat], title: art.title, tag: TYPE_LABELS[art.type], tagClass: TYPE_TAG[art.type] };
+          createArticlePage(id);
+          addNavItem(id);
+        });
+      }
+    } catch(e) { /* no saved data */ }
+  }
+
+  // ── NAVIGATION ──
   function show(id, el) {
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-
     const pageEl = document.getElementById('page-' + id);
     if (!pageEl) return;
     pageEl.classList.add('active');
-
     const meta = pages[id];
     if (meta) {
       document.getElementById('topbar-cat').textContent = meta.cat;
@@ -1152,31 +461,20 @@
       tag.textContent = meta.tag;
       tag.className = 'tag ' + meta.tagClass;
     }
-
-    if (el) {
-      el.classList.add('active');
-    } else {
+    if (el) { el.classList.add('active'); }
+    else {
       document.querySelectorAll('.nav-item').forEach(n => {
-        if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
-          n.classList.add('active');
-        }
+        if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) n.classList.add('active');
       });
     }
     document.getElementById('content').scrollTop = 0;
   }
 
-  // ── SEARCH ──
   function doSearch(val) {
     const q = val.trim().toLowerCase();
-    const navItems = document.querySelectorAll('.nav-item');
-    if (!q) {
-      navItems.forEach(n => n.style.display = '');
-      document.querySelectorAll('.nav-section-label').forEach(l => l.style.display = '');
-      return;
-    }
-    navItems.forEach(n => {
+    document.querySelectorAll('.nav-item').forEach(n => {
       const kw = (n.dataset.keywords || '') + ' ' + n.textContent.toLowerCase();
-      n.style.display = kw.includes(q) ? '' : 'none';
+      n.style.display = (!q || kw.includes(q)) ? '' : 'none';
     });
     document.querySelectorAll('.nav-section').forEach(sec => {
       const label = sec.querySelector('.nav-section-label');
@@ -1185,14 +483,79 @@
     });
   }
 
-  // ── ARTICLE MODAL STATE ──
-  let selectedType = '';
-  let selectedCat  = '';
+  // ── ARTICLE DOM HELPERS ──
+  function buildArticleHTML(art) {
+    const typePill = `<span class="pill pill-${art.type}">${TYPE_LABELS[art.type]}</span>`;
+    const colors = { ap:['var(--accent)','var(--accent-soft)'], ar:['var(--gold)','var(--gold-soft)'], inv:['var(--teal)','var(--teal-soft)'], ic:['#6a8ccc','#eef0fa'] };
+    const [c, bg] = colors[art.cat];
+    const updStr = art.updated ? ` &nbsp;·&nbsp; <span style="color:var(--gold);">Updated ${formatDate(art.updated)}</span>` : '';
+    return `
+      <div class="section-title">${art.title} ${typePill}</div>
+      <div class="article-meta">
+        <span class="meta-badge" style="background:${bg};color:${c};">${CAT_LABELS[art.cat]}</span>
+        <span class="meta-date">Published ${formatDate(art.created)}${updStr}</span>
+        <button class="article-edit-btn" onclick="openEditArticleModal('${art.id}')">✏️ Edit</button>
+        <button class="article-delete-btn" onclick="deleteArticle('${art.id}')">🗑 Delete</button>
+      </div>
+      <div class="article-body-content" id="body-${art.id}">${art.body}</div>
+    `;
+  }
 
+  function createArticlePage(id) {
+    const div = document.createElement('div');
+    div.id = 'page-' + id;
+    div.className = 'page';
+    div.innerHTML = buildArticleHTML(articles[id]);
+    document.getElementById('dynamic-pages').appendChild(div);
+  }
+
+  function renderArticlePage(id) {
+    const div = document.getElementById('page-' + id);
+    if (div) div.innerHTML = buildArticleHTML(articles[id]);
+  }
+
+  function addNavItem(id) {
+    const art = articles[id];
+    const secId = 'nav-section-' + art.cat;
+    let sec = document.getElementById(secId);
+    if (!sec) {
+      sec = document.createElement('div');
+      sec.className = 'nav-section';
+      sec.id = secId;
+      sec.innerHTML = `<div class="nav-section-label">${CAT_LABELS[art.cat]}</div>`;
+      document.getElementById('dynamic-nav').appendChild(sec);
+    }
+    const item = document.createElement('div');
+    item.className = 'nav-item';
+    item.id = 'nav-' + id;
+    item.dataset.keywords = (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase();
+    item.setAttribute('onclick', `show('${id}', this)`);
+    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
+    sec.appendChild(item);
+  }
+
+  function updateNavItem(id) {
+    const art = articles[id];
+    const item = document.getElementById('nav-' + id);
+    if (!item) return;
+    item.dataset.keywords = (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase();
+    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
+    const secId = 'nav-section-' + art.cat;
+    let sec = document.getElementById(secId);
+    if (!sec) {
+      sec = document.createElement('div');
+      sec.className = 'nav-section';
+      sec.id = secId;
+      sec.innerHTML = `<div class="nav-section-label">${CAT_LABELS[art.cat]}</div>`;
+      document.getElementById('dynamic-nav').appendChild(sec);
+    }
+    sec.appendChild(item);
+  }
+
+  // ── ARTICLE CRUD ──
   function openNewArticleModal() {
     if (!isAuthenticated) { openModal(); return; }
-    selectedType = '';
-    selectedCat  = '';
+    selectedType = ''; selectedCat = '';
     document.getElementById('article-edit-id').value = '';
     document.getElementById('article-modal-title').textContent = 'New Article';
     document.getElementById('article-save-btn').textContent = 'Publish Article';
@@ -1208,33 +571,21 @@
     if (!isAuthenticated) return;
     const art = articles[id];
     if (!art) return;
-    selectedType = art.type;
-    selectedCat  = art.cat;
+    selectedType = art.type; selectedCat = art.cat;
     document.getElementById('article-edit-id').value = id;
     document.getElementById('article-modal-title').textContent = 'Edit Article';
     document.getElementById('article-save-btn').textContent = 'Save Changes';
     document.getElementById('article-title-input').value = art.title;
     document.getElementById('article-body-input').innerHTML = art.body;
-
-    document.querySelectorAll('#type-btns .art-toggle').forEach(b => {
-      b.classList.toggle('selected-type', b.dataset.val === selectedType);
-    });
-    document.querySelectorAll('#cat-btns .art-toggle').forEach(b => {
-      b.classList.toggle('selected-cat', b.dataset.val === selectedCat);
-    });
-
+    document.querySelectorAll('#type-btns .art-toggle').forEach(b => b.classList.toggle('selected-type', b.dataset.val === selectedType));
+    document.querySelectorAll('#cat-btns .art-toggle').forEach(b => b.classList.toggle('selected-cat', b.dataset.val === selectedCat));
     clearArticleErrors();
     document.getElementById('article-overlay').style.display = 'flex';
     setTimeout(() => document.getElementById('article-title-input').focus(), 120);
   }
 
-  function closeArticleModal() {
-    document.getElementById('article-overlay').style.display = 'none';
-  }
-
-  function handleArticleOverlayClick(e) {
-    if (e.target === document.getElementById('article-overlay')) closeArticleModal();
-  }
+  function closeArticleModal() { document.getElementById('article-overlay').style.display = 'none'; }
+  function handleArticleOverlayClick(e) { if (e.target === document.getElementById('article-overlay')) closeArticleModal(); }
 
   function selectArticleType(btn) {
     selectedType = btn.dataset.val;
@@ -1251,200 +602,87 @@
   }
 
   function clearArticleErrors() {
-    ['type-error','cat-error','title-error','body-error'].forEach(id => {
-      document.getElementById(id).textContent = '';
-    });
+    ['type-error','cat-error','title-error','body-error'].forEach(id => document.getElementById(id).textContent = '');
   }
 
   function saveArticle() {
     let valid = true;
-    if (!selectedType) {
-      document.getElementById('type-error').textContent = '⚠ Please select an article type.';
-      valid = false;
-    }
-    if (!selectedCat) {
-      document.getElementById('cat-error').textContent = '⚠ Please select a category.';
-      valid = false;
-    }
+    if (!selectedType) { document.getElementById('type-error').textContent = '⚠ Select an article type.'; valid = false; }
+    if (!selectedCat)  { document.getElementById('cat-error').textContent  = '⚠ Select a category.'; valid = false; }
     const title = document.getElementById('article-title-input').value.trim();
-    if (!title) {
-      document.getElementById('title-error').textContent = '⚠ A title is required.';
-      valid = false;
-    }
+    if (!title) { document.getElementById('title-error').textContent = '⚠ A title is required.'; valid = false; }
     const body = document.getElementById('article-body-input').innerHTML.trim();
-    if (!body || body === '<br>') {
-      document.getElementById('body-error').textContent = '⚠ Article content is required.';
-      valid = false;
-    }
+    if (!body || body === '<br>') { document.getElementById('body-error').textContent = '⚠ Content is required.'; valid = false; }
     if (!valid) return;
 
     const editId = document.getElementById('article-edit-id').value;
-    const now = new Date();
+    const now = new Date().toISOString();
 
     if (editId) {
-      // Update existing
       const art = articles[editId];
-      art.title    = title;
-      art.body     = body;
-      art.type     = selectedType;
-      art.cat      = selectedCat;
-      art.updated  = now;
+      art.title = title; art.body = body; art.type = selectedType; art.cat = selectedCat; art.updated = now;
+      pages[editId] = { cat: CAT_LABELS[selectedCat], title, tag: TYPE_LABELS[selectedType], tagClass: TYPE_TAG[selectedType] };
       renderArticlePage(editId);
       updateNavItem(editId);
-      pages[editId] = {
-        cat: CAT_LABELS[selectedCat],
-        title: title,
-        tag: TYPE_LABELS[selectedType],
-        tagClass: TYPE_TAG[selectedType]
-      };
       show(editId, null);
     } else {
-      // New article
       const id = 'article-' + (articleIdCounter++);
       articles[id] = { id, title, body, type: selectedType, cat: selectedCat, created: now, updated: null };
-      pages[id] = {
-        cat: CAT_LABELS[selectedCat],
-        title: title,
-        tag: TYPE_LABELS[selectedType],
-        tagClass: TYPE_TAG[selectedType]
-      };
+      pages[id] = { cat: CAT_LABELS[selectedCat], title, tag: TYPE_LABELS[selectedType], tagClass: TYPE_TAG[selectedType] };
       createArticlePage(id);
       addNavItem(id);
-      show(id, null);
-      // Hide empty state
       document.getElementById('empty-state').style.display = 'none';
+      show(id, null);
     }
 
+    persist();
     closeArticleModal();
   }
 
-  function createArticlePage(id) {
-    const art = articles[id];
-    const div = document.createElement('div');
-    div.id = 'page-' + id;
-    div.className = 'page';
-    div.innerHTML = buildArticleHTML(art);
-    document.getElementById('dynamic-pages').appendChild(div);
-  }
-
-  function renderArticlePage(id) {
-    const art = articles[id];
-    const div = document.getElementById('page-' + id);
-    if (div) div.innerHTML = buildArticleHTML(art);
-  }
-
-  function buildArticleHTML(art) {
-    const typePill = art.type === 'policy'
-      ? `<span class="pill pill-policy">${TYPE_LABELS[art.type]}</span>`
-      : `<span class="pill pill-howto">${TYPE_LABELS[art.type]}</span>`;
-
-    const catBadgeColor = { ap: 'var(--accent)', ar: 'var(--gold)', inv: 'var(--teal)', ic: '#6a8ccc' }[art.cat];
-    const catBadgeBg    = { ap: 'var(--accent-soft)', ar: 'var(--gold-soft)', inv: 'var(--teal-soft)', ic: '#eef0fa' }[art.cat];
-
-    const publishedStr = `Published ${formatDate(art.created)}`;
-    const updatedStr   = art.updated ? ` &nbsp;·&nbsp; <span style="color:var(--gold);">Last updated ${formatDate(art.updated)}</span>` : '';
-
-    return `
-      <div class="section-title">${art.title} ${typePill}</div>
-      <div class="article-meta">
-        <span class="meta-badge" style="background:${catBadgeBg};color:${catBadgeColor};">${CAT_LABELS[art.cat]}</span>
-        <span class="meta-date">${publishedStr}${updatedStr}</span>
-        <button class="article-edit-btn" onclick="openEditArticleModal('${art.id}')">✏️ Edit Article</button>
-      </div>
-      <div class="article-body-content" id="body-${art.id}">${art.body}</div>
-    `;
-  }
-
-  function escapeHTML(str) {
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function addNavItem(id) {
-    const art = articles[id];
-    // Find or create nav section for this category
-    const sectionId = 'nav-section-' + art.cat;
-    let section = document.getElementById(sectionId);
-    if (!section) {
-      section = document.createElement('div');
-      section.className = 'nav-section';
-      section.id = sectionId;
-      section.innerHTML = `<div class="nav-section-label">${CAT_LABELS[art.cat]}</div>`;
-      document.getElementById('dynamic-nav').appendChild(section);
+  function deleteArticle(id) {
+    if (!isAuthenticated) return;
+    if (!confirm('Delete this article? This cannot be undone.')) return;
+    const pageEl = document.getElementById('page-' + id);
+    if (pageEl) pageEl.remove();
+    const navItem = document.getElementById('nav-' + id);
+    if (navItem) {
+      const section = navItem.closest('.nav-section');
+      navItem.remove();
+      if (section && section.querySelectorAll('.nav-item').length === 0) section.remove();
     }
-    const item = document.createElement('div');
-    item.className = 'nav-item';
-    item.id = 'nav-' + id;
-    item.setAttribute('data-keywords', (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase());
-    item.setAttribute('onclick', `show('${id}', this)`);
-    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
-    section.appendChild(item);
+    delete articles[id];
+    delete pages[id];
+    if (Object.keys(articles).length === 0) document.getElementById('empty-state').style.display = '';
+    show('home', document.querySelector('.nav-item[onclick*="home"]'));
+    persist();
   }
 
-  function updateNavItem(id) {
-    const art = articles[id];
-    const item = document.getElementById('nav-' + id);
-    if (item) {
-      item.setAttribute('data-keywords', (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase());
-      item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
-      // Move to correct section if category changed
-      const sectionId = 'nav-section-' + art.cat;
-      let section = document.getElementById(sectionId);
-      if (!section) {
-        section = document.createElement('div');
-        section.className = 'nav-section';
-        section.id = sectionId;
-        section.innerHTML = `<div class="nav-section-label">${CAT_LABELS[art.cat]}</div>`;
-        document.getElementById('dynamic-nav').appendChild(section);
-      }
-      section.appendChild(item);
-    }
-  }
-
-  // ── TRIGGER READER LOGIN ON LOAD ──
+  // ── AUTH ──
   window.addEventListener('DOMContentLoaded', () => {
-    showReaderLogin();
-  });
-
-  // ── TWO-TIER PASSWORD SYSTEM ──
-  const READER_PASSWORD = 'Accountingis#1!';
-  const ADMIN_PASSWORD  = '5801Edwards';
-  let isReader        = false;
-  let isAuthenticated = false;
-  let selectedNoteType = 'tip';
-
-  // ── READER LOGIN ──
-  function showReaderLogin() {
     document.getElementById('reader-overlay').style.display = 'flex';
     setTimeout(() => document.getElementById('reader-pw').focus(), 150);
-  }
+  });
+
+  document.getElementById('reader-pw').addEventListener('keydown', e => { if (e.key === 'Enter') submitReaderPassword(); });
 
   function submitReaderPassword() {
     const val = document.getElementById('reader-pw').value;
     if (val === READER_PASSWORD || val === ADMIN_PASSWORD) {
-      isReader = true;
       document.getElementById('reader-overlay').style.display = 'none';
       document.getElementById('sidebar').style.display = '';
       document.getElementById('main').style.display = '';
-      if (val === ADMIN_PASSWORD) {
-        isAuthenticated = true;
-        enableEditMode();
-      }
+      loadFromStorage().then(() => {
+        if (val === ADMIN_PASSWORD) { isAuthenticated = true; enableEditMode(); }
+      });
     } else {
-      shakeModal('reader-card');
+      shakeEl('reader-card');
       document.getElementById('reader-error').textContent = 'Incorrect password. Please try again.';
       document.getElementById('reader-pw').value = '';
       document.getElementById('reader-pw').focus();
     }
   }
 
-  document.getElementById('reader-pw').addEventListener('keydown', e => {
-    if (e.key === 'Enter') submitReaderPassword();
-  });
-
-  // ── ADMIN MODAL ──
-  function handleAdminBtn() {
-    if (isAuthenticated) { lockSession(); } else { openModal(); }
-  }
+  function handleAdminBtn() { if (isAuthenticated) lockSession(); else openModal(); }
 
   function openModal() {
     document.getElementById('modal-overlay').classList.add('visible');
@@ -1453,14 +691,8 @@
     document.getElementById('modal-pw').classList.remove('error');
     setTimeout(() => document.getElementById('modal-pw').focus(), 100);
   }
-
-  function closeModal() {
-    document.getElementById('modal-overlay').classList.remove('visible');
-  }
-
-  function handleOverlayClick(e) {
-    if (e.target === document.getElementById('modal-overlay')) closeModal();
-  }
+  function closeModal() { document.getElementById('modal-overlay').classList.remove('visible'); }
+  function handleOverlayClick(e) { if (e.target === document.getElementById('modal-overlay')) closeModal(); }
 
   function submitPassword() {
     const val = document.getElementById('modal-pw').value;
@@ -1470,19 +702,19 @@
       enableEditMode();
     } else {
       document.getElementById('modal-pw').classList.add('error');
-      document.getElementById('modal-error').textContent = 'Incorrect password. Please try again.';
+      document.getElementById('modal-error').textContent = 'Incorrect password.';
       document.getElementById('modal-pw').value = '';
       document.getElementById('modal-pw').focus();
-      shakeModal('modal');
+      shakeEl('modal');
     }
   }
 
-  function shakeModal(id) {
+  function shakeEl(id) {
     const el = document.getElementById(id);
     el.style.transform = 'translateX(-8px)';
-    setTimeout(() => { el.style.transform = 'translateX(8px)'; }, 80);
-    setTimeout(() => { el.style.transform = 'translateX(-5px)'; }, 160);
-    setTimeout(() => { el.style.transform = 'translateX(0)'; }, 240);
+    setTimeout(() => el.style.transform = 'translateX(8px)', 80);
+    setTimeout(() => el.style.transform = 'translateX(-5px)', 160);
+    setTimeout(() => el.style.transform = 'translateX(0)', 240);
   }
 
   function enableEditMode() {
@@ -1507,46 +739,23 @@
   }
 
   function makeContentEditable(on) {
-    const selectors = ['#content p','#content li','#content h4','#content td','#content .intro-block p','#content .page-lead'];
-    selectors.forEach(sel => {
+    ['#content p','#content li','#content h4','#content td','#content .intro-block p','#content .page-lead'].forEach(sel => {
       document.querySelectorAll(sel).forEach(el => {
         if (el.closest('.admin-note-wrap')) return;
-        el.contentEditable = on ? 'true' : 'false';
-        if (!on) el.removeAttribute('contenteditable');
+        if (on) el.contentEditable = 'true';
+        else el.removeAttribute('contenteditable');
       });
     });
-    document.querySelectorAll('.edit-delete-btn').forEach(btn => {
-      btn.style.display = on ? 'inline-flex' : 'none';
-    });
+    document.querySelectorAll('.edit-delete-btn').forEach(btn => btn.style.display = on ? 'inline-flex' : 'none');
   }
 
-  // ── ADD NOTE ──
-  function openAddNote() {
-    if (!isAuthenticated) return;
-    document.getElementById('note-title').value = '';
-    document.getElementById('note-body').value = '';
-    selectedNoteType = 'tip';
-    document.querySelectorAll('.note-type-btn').forEach(b => {
-      b.classList.remove('selected', 'warn', 'policy');
-      if (b.dataset.type === 'tip') b.classList.add('selected');
-    });
-    document.getElementById('note-overlay').style.display = 'flex';
-    setTimeout(() => document.getElementById('note-body').focus(), 100);
-  }
-
-  function closeNoteModal() {
-    document.getElementById('note-overlay').style.display = 'none';
-  }
-
-  function handleNoteOverlayClick(e) {
-    if (e.target === document.getElementById('note-overlay')) closeNoteModal();
-  }
+  // ── NOTES ──
+  function closeNoteModal() { document.getElementById('note-overlay').style.display = 'none'; }
+  function handleNoteOverlayClick(e) { if (e.target === document.getElementById('note-overlay')) closeNoteModal(); }
 
   function selectNoteType(btn, type) {
     selectedNoteType = type;
-    document.querySelectorAll('.note-type-btn').forEach(b => {
-      b.classList.remove('selected', 'warn', 'policy');
-    });
+    document.querySelectorAll('.note-type-btn').forEach(b => b.classList.remove('selected','warn','policy'));
     btn.classList.add('selected');
     if (type === 'warn') btn.classList.add('warn');
     if (type === 'policy') btn.classList.add('policy');
@@ -1555,11 +764,7 @@
   function saveNote() {
     const title = document.getElementById('note-title').value.trim();
     const body  = document.getElementById('note-body').value.trim();
-    if (!body) {
-      document.getElementById('note-body').style.borderColor = 'var(--accent)';
-      document.getElementById('note-body').focus();
-      return;
-    }
+    if (!body) { document.getElementById('note-body').style.borderColor = 'var(--accent)'; document.getElementById('note-body').focus(); return; }
     document.getElementById('note-body').style.borderColor = '';
 
     const activePage = document.querySelector('.page.active');
@@ -1567,38 +772,48 @@
 
     const wrap = document.createElement('div');
     wrap.className = 'admin-note-wrap';
-    wrap.style.position = 'relative';
-    wrap.style.marginBottom = '16px';
+    wrap.style.cssText = 'position:relative;margin-bottom:16px;';
 
     const deleteBtn = `<button class="edit-delete-btn" onclick="deleteNote(this)" title="Delete note" style="position:absolute;top:10px;right:10px;">✕</button>`;
-    let noteHTML = '';
-    if (selectedNoteType === 'tip') {
-      noteHTML = `<div class="tip-box" style="padding-right:40px;">${title ? `<strong>${title}:</strong> ` : ''}${body}</div>`;
-    } else if (selectedNoteType === 'warn') {
-      noteHTML = `<div class="warn-box" style="padding-right:40px;"><strong>${title ? title + ':' : '⚠️'}</strong> ${body}</div>`;
-    } else if (selectedNoteType === 'policy') {
-      noteHTML = `<div class="policy-box" style="padding-right:40px;">${title ? `<h4>${title}</h4>` : ''}<p>${body}</p></div>`;
-    }
+    let html = '';
+    if (selectedNoteType === 'tip') html = `<div class="tip-box" style="padding-right:40px;">${title ? `<strong>${title}:</strong> ` : ''}${body}</div>`;
+    else if (selectedNoteType === 'warn') html = `<div class="warn-box" style="padding-right:40px;"><strong>${title ? title + ':' : '⚠️'}</strong> ${body}</div>`;
+    else if (selectedNoteType === 'policy') html = `<div class="policy-box" style="padding-right:40px;">${title ? `<h4>${title}</h4>` : ''}<p>${body}</p></div>`;
 
-    wrap.innerHTML = noteHTML + deleteBtn;
+    wrap.innerHTML = html + deleteBtn;
     activePage.appendChild(wrap);
     wrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    wrap.querySelectorAll('p, h4').forEach(el => { el.contentEditable = 'true'; });
+    wrap.querySelectorAll('p, h4').forEach(el => el.contentEditable = 'true');
+
+    // Persist note with article
+    const pageId = activePage.id.replace('page-', '');
+    if (articles[pageId]) {
+      const bodyEl = document.getElementById('body-' + pageId);
+      if (bodyEl) {
+        articles[pageId].body = bodyEl.innerHTML;
+        articles[pageId].updated = new Date().toISOString();
+        persist();
+      }
+    }
     closeNoteModal();
   }
 
   function deleteNote(btn) {
     if (!isAuthenticated) return;
     const wrap = btn.closest('.admin-note-wrap');
-    if (wrap && confirm('Delete this note?')) wrap.remove();
+    if (wrap && confirm('Delete this note?')) {
+      wrap.remove();
+      const activePage = document.querySelector('.page.active');
+      const pageId = activePage && activePage.id.replace('page-', '');
+      if (pageId && articles[pageId]) {
+        const bodyEl = document.getElementById('body-' + pageId);
+        if (bodyEl) { articles[pageId].body = bodyEl.innerHTML; articles[pageId].updated = new Date().toISOString(); persist(); }
+      }
+    }
   }
 
-  // ── RICH TEXT EDITOR COMMANDS ──
-  function rteCmd(cmd) {
-    document.getElementById('article-body-input').focus();
-    document.execCommand(cmd, false, null);
-    updateRteToolbar();
-  }
+  // ── RICH TEXT EDITOR ──
+  function rteCmd(cmd) { document.getElementById('article-body-input').focus(); document.execCommand(cmd, false, null); updateRteToolbar(); }
 
   function rteHeading(tag) {
     const editor = document.getElementById('article-body-input');
@@ -1606,33 +821,16 @@
     const sel = window.getSelection();
     if (!sel.rangeCount) return;
     const range = sel.getRangeAt(0);
-
-    // Get the block containing the selection
     let block = range.commonAncestorContainer;
-    while (block && block.parentNode !== editor && block !== editor) {
-      block = block.parentNode;
-    }
-
+    while (block && block.parentNode !== editor && block !== editor) block = block.parentNode;
     if (block && block !== editor && (block.tagName === 'H2' || block.tagName === 'H3')) {
-      // Toggle off — replace with <p>
-      const p = document.createElement('p');
-      p.innerHTML = block.innerHTML;
-      block.parentNode.replaceChild(p, block);
+      const p = document.createElement('p'); p.innerHTML = block.innerHTML; block.parentNode.replaceChild(p, block);
     } else {
-      const heading = document.createElement(tag);
-      heading.innerHTML = sel.toString() || '&#8203;';
-      if (block && block !== editor) {
-        block.parentNode.replaceChild(heading, block);
-      } else {
-        range.deleteContents();
-        range.insertNode(heading);
-      }
-      // Place cursor inside heading
-      const newRange = document.createRange();
-      newRange.selectNodeContents(heading);
-      newRange.collapse(false);
-      sel.removeAllRanges();
-      sel.addRange(newRange);
+      const h = document.createElement(tag); h.innerHTML = sel.toString() || '&#8203;';
+      if (block && block !== editor) block.parentNode.replaceChild(h, block);
+      else { range.deleteContents(); range.insertNode(h); }
+      const nr = document.createRange(); nr.selectNodeContents(h); nr.collapse(false);
+      sel.removeAllRanges(); sel.addRange(nr);
     }
     updateRteToolbar();
   }
@@ -1643,53 +841,30 @@
     const sel = window.getSelection();
     if (!sel.rangeCount) return;
     const range = sel.getRangeAt(0);
-
     let block = range.commonAncestorContainer;
-    while (block && block.parentNode !== editor && block !== editor) {
-      block = block.parentNode;
-    }
-
+    while (block && block.parentNode !== editor && block !== editor) block = block.parentNode;
     if (block && block.tagName === 'BLOCKQUOTE') {
-      const p = document.createElement('p');
-      p.innerHTML = block.innerHTML;
-      block.parentNode.replaceChild(p, block);
+      const p = document.createElement('p'); p.innerHTML = block.innerHTML; block.parentNode.replaceChild(p, block);
     } else {
-      const bq = document.createElement('blockquote');
-      bq.innerHTML = sel.toString() || '&#8203;';
-      if (block && block !== editor) {
-        block.parentNode.replaceChild(bq, block);
-      } else {
-        range.deleteContents();
-        range.insertNode(bq);
-      }
-      const newRange = document.createRange();
-      newRange.selectNodeContents(bq);
-      newRange.collapse(false);
-      sel.removeAllRanges();
-      sel.addRange(newRange);
+      const bq = document.createElement('blockquote'); bq.innerHTML = sel.toString() || '&#8203;';
+      if (block && block !== editor) block.parentNode.replaceChild(bq, block);
+      else { range.deleteContents(); range.insertNode(bq); }
+      const nr = document.createRange(); nr.selectNodeContents(bq); nr.collapse(false);
+      sel.removeAllRanges(); sel.addRange(nr);
     }
     updateRteToolbar();
   }
 
   function updateRteToolbar() {
-    const cmds = [
-      { btn: 'rte-bold',      cmd: 'bold' },
-      { btn: 'rte-italic',    cmd: 'italic' },
-      { btn: 'rte-underline', cmd: 'underline' },
-    ];
-    cmds.forEach(({ btn, cmd }) => {
-      const el = document.querySelector(`.rte-btn[title="${cmd.charAt(0).toUpperCase() + cmd.slice(1)}"]`);
+    [['Bold','bold'],['Italic','italic'],['Underline','underline']].forEach(([title, cmd]) => {
+      const el = document.querySelector(`.rte-btn[title="${title}"]`);
       if (el) el.classList.toggle('rte-active', document.queryCommandState(cmd));
     });
   }
 
-  // Update toolbar state on selection change
   document.addEventListener('selectionchange', () => {
-    if (document.activeElement && document.activeElement.id === 'article-body-input') {
-      updateRteToolbar();
-    }
+    if (document.activeElement && document.activeElement.id === 'article-body-input') updateRteToolbar();
   });
-
 </script>
 </body>
 </html>
