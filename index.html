@@ -70,6 +70,7 @@
   .dot-gold { background: var(--gold); }
   .dot-teal { background: #4ab8a5; }
   .dot-blue { background: #6a8ccc; }
+  .dot-purple { background: #9b6fcc; }
 
   #main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
@@ -81,6 +82,7 @@
   .tag { margin-left: auto; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
   .tag-policy { background: var(--gold-soft); color: var(--gold); }
   .tag-howto { background: var(--teal-soft); color: var(--teal); }
+  .tag-memo { background: #eef0fa; color: #6a8ccc; }
   .tag-both { background: var(--accent-soft); color: var(--accent); }
 
   #content { flex: 1; overflow-y: auto; padding: 36px 40px 60px; }
@@ -101,6 +103,7 @@
   .section-title .pill { font-family: 'DM Mono', monospace; font-size: 0.6rem; padding: 3px 8px; border-radius: 4px; letter-spacing: 0.08em; text-transform: uppercase; }
   .pill-policy { background: var(--gold-soft); color: var(--gold); }
   .pill-howto { background: var(--teal-soft); color: var(--teal); }
+  .pill-memo { background: #eef0fa; color: #6a8ccc; }
 
   .policy-box { background: var(--gold-soft); border: 1px solid #e0d0a0; border-left: 4px solid var(--gold); border-radius: 6px; padding: 18px 22px; margin-bottom: 16px; }
   .policy-box h4 { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
@@ -127,7 +130,7 @@
   .article-body-content h3 { font-size: 0.9rem; font-weight: 600; margin: 16px 0 4px; color: var(--ink); }
   .article-body-content ul, .article-body-content ol { padding-left: 22px; margin: 8px 0; }
   .article-body-content li { margin-bottom: 4px; }
-  .article-body-content blockquote { background: var(--gold-soft); border-left: 4px solid var(--gold); border-radius: 4px; padding: 12px 16px; margin: 12px 0; }
+  .article-body-content img { max-width:100%; height:auto; border-radius:6px; margin:12px 0; display:block; border:1px solid var(--rule); }
 
   .article-edit-btn, .article-delete-btn {
     padding: 5px 14px; border-radius: 6px; border: 1.5px solid var(--rule); background: transparent;
@@ -326,17 +329,54 @@
         <span style="font-weight:600;font-size:0.82rem;">How-To</span><br>
         <span style="font-size:0.72rem;opacity:0.7;">Step-by-step QBO guide</span>
       </button>
+      <button class="art-toggle" data-val="memo" onclick="selectArticleType(this)" style="flex:1;">
+        <span style="font-size:1.1rem;">📝</span><br>
+        <span style="font-weight:600;font-size:0.82rem;">Memo</span><br>
+        <span style="font-size:0.72rem;opacity:0.7;">Updates &amp; notices</span>
+      </button>
     </div>
     <div id="type-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:8px;"></div>
 
-    <div class="note-field-label">Category</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;" id="cat-btns">
-      <button class="art-toggle" data-val="ap" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🧾</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Payable</span></button>
-      <button class="art-toggle" data-val="ar" onclick="selectArticleCat(this)"><span style="font-size:1rem;">💰</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Receivable</span></button>
-      <button class="art-toggle" data-val="inv" onclick="selectArticleCat(this)"><span style="font-size:1rem;">📦</span> <span style="font-weight:600;font-size:0.82rem;">Inventory</span></button>
-      <button class="art-toggle" data-val="ic" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🔁</span> <span style="font-weight:600;font-size:0.82rem;">Intercompany</span></button>
+    <div id="cat-section">
+      <div class="note-field-label">Category</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px;" id="cat-btns">
+        <button class="art-toggle" data-val="ap" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🧾</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Payable</span></button>
+        <button class="art-toggle" data-val="ar" onclick="selectArticleCat(this)"><span style="font-size:1rem;">💰</span> <span style="font-weight:600;font-size:0.82rem;">Accounts Receivable</span></button>
+        <button class="art-toggle" data-val="inv" onclick="selectArticleCat(this)"><span style="font-size:1rem;">📦</span> <span style="font-weight:600;font-size:0.82rem;">Inventory</span></button>
+        <button class="art-toggle" data-val="ic" onclick="selectArticleCat(this)"><span style="font-size:1rem;">🔁</span> <span style="font-weight:600;font-size:0.82rem;">Intercompany</span></button>
+      </div>
+      <div id="new-cat-form" style="display:none;margin-top:8px;background:var(--paper-warm);border:1.5px solid var(--rule);border-radius:8px;padding:12px 14px;">
+        <div style="font-size:0.72rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:8px;">New Category</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span id="new-cat-emoji-preview" style="font-size:1.4rem;min-width:28px;text-align:center;">📁</span>
+          <input id="new-cat-name" class="note-field" type="text" placeholder="e.g. Payroll, Fixed Assets…"
+            oninput="onNewCatInput(this.value)"
+            onkeydown="if(event.key==='Enter'){event.preventDefault();confirmNewCat();}"
+            style="flex:1;margin:0;">
+        </div>
+        <div id="new-cat-emoji-suggestions" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;min-height:28px;"></div>
+        <div style="display:flex;gap:8px;margin-top:10px;">
+          <button type="button" onclick="confirmNewCat()"
+            style="padding:6px 16px;border-radius:6px;border:none;background:var(--teal);color:#fff;font-family:'DM Sans',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;">
+            Add Category
+          </button>
+          <button type="button" onclick="cancelNewCat()"
+            style="padding:6px 14px;border-radius:6px;border:1.5px solid var(--rule);background:transparent;color:var(--ink-light);font-family:'DM Sans',sans-serif;font-size:0.78rem;cursor:pointer;">
+            Cancel
+          </button>
+        </div>
+        <div id="new-cat-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-top:4px;"></div>
+      </div>
+      <div style="margin-top:6px;">
+        <button type="button" id="add-cat-btn" onclick="openNewCatForm()"
+          style="padding:5px 12px;border-radius:6px;border:1.5px dashed var(--rule);background:transparent;color:var(--ink-faint);font-family:'DM Sans',sans-serif;font-size:0.75rem;cursor:pointer;transition:all 0.15s;"
+          onmouseover="this.style.borderColor='var(--teal)';this.style.color='var(--teal)'"
+          onmouseout="this.style.borderColor='var(--rule)';this.style.color='var(--ink-faint)'">
+          + New Category
+        </button>
+      </div>
+      <div id="cat-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:4px;"></div>
     </div>
-    <div id="cat-error" style="font-size:0.75rem;color:var(--accent);min-height:16px;margin-bottom:8px;"></div>
 
     <div class="note-field-label">Article Title</div>
     <input class="note-field" id="article-title-input" type="text" placeholder="e.g. Entering Vendor Bills" style="margin-bottom:4px;">
@@ -355,6 +395,7 @@
       <button type="button" class="rte-btn" onclick="rteCmd('insertOrderedList')" title="Numbered list">1.</button>
       <div class="rte-divider"></div>
       <button type="button" class="rte-btn" onclick="rteBlockquote()" title="Highlight box">❝</button>
+      <button type="button" class="rte-btn" onclick="rteInsertImage()" title="Insert image">🖼</button>
       <button type="button" class="rte-btn" onclick="rteCmd('removeFormat')" title="Clear formatting">✕</button>
     </div>
     <div id="article-body-input" contenteditable="true" class="note-field rte-editor" placeholder="Write your policy or step-by-step guide here…"></div>
@@ -391,11 +432,13 @@
 
 <script>
   // ── CONSTANTS ──
-  const STORAGE_KEY = 'kb-articles-v1';
-  const CAT_LABELS  = { ap: 'Accounts Payable', ar: 'Accounts Receivable', inv: 'Inventory', ic: 'Intercompany' };
-  const CAT_DOTS    = { ap: 'dot-red', ar: 'dot-gold', inv: 'dot-teal', ic: 'dot-blue' };
-  const TYPE_LABELS = { policy: 'Policy', howto: 'How-To' };
-  const TYPE_TAG    = { policy: 'tag-policy', howto: 'tag-howto' };
+  const STORAGE_KEY  = 'kb-articles-v1';
+  const CATS_KEY     = 'kb-custom-cats-v1';
+  let CAT_LABELS  = { ap: 'Accounts Payable', ar: 'Accounts Receivable', inv: 'Inventory', ic: 'Intercompany', memo: 'Memos' };
+  let CAT_DOTS    = { ap: 'dot-red', ar: 'dot-gold', inv: 'dot-teal', ic: 'dot-blue', memo: 'dot-purple' };
+  let CAT_EMOJIS  = { ap: '🧾', ar: '💰', inv: '📦', ic: '🔁', memo: '📝' };
+  const TYPE_LABELS = { policy: 'Policy', howto: 'How-To', memo: 'Memo' };
+  const TYPE_TAG    = { policy: 'tag-policy', howto: 'tag-howto', memo: 'tag-memo' };
 
   const READER_PASSWORD = 'Accountingis#1!';
   const ADMIN_PASSWORD  = '5801Edwards';
@@ -423,13 +466,36 @@
   function persist() {
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ articles, articleIdCounter }));
+      persistCats();
       flashSaved();
     } catch(e) { console.warn('Storage write failed', e); }
+  }
+
+  function persistCats() {
+    try {
+      localStorage.setItem(CATS_KEY, JSON.stringify({ CAT_LABELS, CAT_DOTS, CAT_EMOJIS }));
+    } catch(e) { console.warn('Cat storage write failed', e); }
   }
 
   function loadFromStorage() {
     if (storageLoaded) return;
     storageLoaded = true;
+    // Load custom categories first so article restore uses correct labels
+    try {
+      const rawCats = localStorage.getItem(CATS_KEY);
+      if (rawCats) {
+        const catData = JSON.parse(rawCats);
+        CAT_LABELS = catData.CAT_LABELS || CAT_LABELS;
+        CAT_DOTS   = catData.CAT_DOTS   || CAT_DOTS;
+        CAT_EMOJIS = catData.CAT_EMOJIS || CAT_EMOJIS;
+        // Render any custom category buttons into the modal
+        Object.keys(CAT_LABELS).forEach(key => {
+          if (!document.querySelector(`#cat-btns .art-toggle[data-val="${key}"]`)) {
+            appendCatButton(key);
+          }
+        });
+      }
+    } catch(e) { console.warn('Cat load failed', e); }
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) return;
@@ -489,7 +555,7 @@
   // ── ARTICLE DOM HELPERS ──
   function buildArticleHTML(art) {
     const typePill = `<span class="pill pill-${art.type}">${TYPE_LABELS[art.type]}</span>`;
-    const colors = { ap:['var(--accent)','var(--accent-soft)'], ar:['var(--gold)','var(--gold-soft)'], inv:['var(--teal)','var(--teal-soft)'], ic:['#6a8ccc','#eef0fa'] };
+    const colors = { ap:['var(--accent)','var(--accent-soft)'], ar:['var(--gold)','var(--gold-soft)'], inv:['var(--teal)','var(--teal-soft)'], ic:['#6a8ccc','#eef0fa'], memo:['#9b6fcc','#f3eefa'] };
     const [c, bg] = colors[art.cat];
     const updStr = art.updated ? ` &nbsp;·&nbsp; <span style="color:var(--gold);">Updated ${formatDate(art.updated)}</span>` : '';
     return `
@@ -565,6 +631,7 @@
     document.getElementById('article-title-input').value = '';
     document.getElementById('article-body-input').innerHTML = '';
     document.querySelectorAll('.art-toggle').forEach(b => b.classList.remove('selected-type','selected-cat'));
+    document.getElementById('cat-section').style.display = '';
     clearArticleErrors();
     document.getElementById('article-overlay').style.display = 'flex';
     setTimeout(() => document.getElementById('article-title-input').focus(), 120);
@@ -582,6 +649,7 @@
     document.getElementById('article-body-input').innerHTML = art.body;
     document.querySelectorAll('#type-btns .art-toggle').forEach(b => b.classList.toggle('selected-type', b.dataset.val === selectedType));
     document.querySelectorAll('#cat-btns .art-toggle').forEach(b => b.classList.toggle('selected-cat', b.dataset.val === selectedCat));
+    document.getElementById('cat-section').style.display = selectedType === 'memo' ? 'none' : '';
     clearArticleErrors();
     document.getElementById('article-overlay').style.display = 'flex';
     setTimeout(() => document.getElementById('article-title-input').focus(), 120);
@@ -595,6 +663,20 @@
     document.querySelectorAll('#type-btns .art-toggle').forEach(b => b.classList.remove('selected-type'));
     btn.classList.add('selected-type');
     document.getElementById('type-error').textContent = '';
+
+    // Memos always go to the Memos category — hide the picker
+    const catSection = document.getElementById('cat-section');
+    if (selectedType === 'memo') {
+      selectedCat = 'memo';
+      catSection.style.display = 'none';
+      document.querySelectorAll('#cat-btns .art-toggle').forEach(b => b.classList.remove('selected-cat'));
+    } else {
+      catSection.style.display = '';
+      if (selectedCat === 'memo') {
+        selectedCat = '';
+        document.querySelectorAll('#cat-btns .art-toggle').forEach(b => b.classList.remove('selected-cat'));
+      }
+    }
   }
 
   function selectArticleCat(btn) {
@@ -855,6 +937,131 @@
       sel.removeAllRanges(); sel.addRange(nr);
     }
     updateRteToolbar();
+  }
+
+  function rteInsertImage() {
+    const filename = prompt('Image filename (e.g. qbo-vendor-bill.png):\n\nMake sure the file is uploaded to the /images/ folder in your GitHub repo.');
+    if (!filename || !filename.trim()) return;
+    const editor = document.getElementById('article-body-input');
+    editor.focus();
+    const img = document.createElement('img');
+    img.src = 'images/' + filename.trim();
+    img.alt = filename.trim().replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+    img.style.cssText = 'max-width:100%;height:auto;border-radius:6px;margin:12px 0;display:block;border:1px solid var(--rule);';
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount) {
+      const range = sel.getRangeAt(0);
+      range.collapse(false);
+      range.insertNode(img);
+      range.setStartAfter(img);
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+    } else {
+      editor.appendChild(img);
+    }
+  }
+
+  // ── CUSTOM CATEGORIES ──
+  const EMOJI_SUGGESTIONS = [
+    { keys: ['payroll','salary','wages','hr','employee','staff','compensation'], emojis: ['👥','💼','🧑‍💼','📊'] },
+    { keys: ['tax','taxes','vat','gst','filing','irs','compliance'], emojis: ['🏛️','📑','⚖️','🗂️'] },
+    { keys: ['fixed asset','assets','equipment','property','depreciation','capex'], emojis: ['🏗️','🖥️','🏢','⚙️'] },
+    { keys: ['bank','banking','reconcil','cash','treasury','wire','transfer'], emojis: ['🏦','💳','💵','🔄'] },
+    { keys: ['expense','reimburs','travel','entertain'], emojis: ['🧾','✈️','🍽️','💸'] },
+    { keys: ['revenue','income','sales','billing','invoice'], emojis: ['📈','💰','🛒','📋'] },
+    { keys: ['budget','forecast','planning','variance','report'], emojis: ['📊','📉','🎯','🗓️'] },
+    { keys: ['lease','rent','real estate','facility'], emojis: ['🏠','🔑','🏢','📝'] },
+    { keys: ['loan','debt','liability','credit','borrow'], emojis: ['🏦','📜','💳','⚖️'] },
+    { keys: ['vendor','supplier','purchase','procurement'], emojis: ['🤝','📦','🛒','🏭'] },
+    { keys: ['customer','client','contract','agreement'], emojis: ['🤝','👤','📄','✅'] },
+    { keys: ['close','period','quarter','annual','year','month'], emojis: ['📅','🗓️','✅','🔒'] },
+    { keys: ['audit','review','internal','control'], emojis: ['🔍','✅','📋','🛡️'] },
+    { keys: ['equity','stock','share','ownership','invest'], emojis: ['📈','🏦','💼','🌐'] },
+    { keys: ['insurance','risk','claim'], emojis: ['🛡️','📋','⚠️'] },
+    { keys: ['software','subscription','saas','license','tech'], emojis: ['💻','🖥️','📱','⚙️'] },
+    { keys: ['project','job','cost','wip'], emojis: ['🏗️','📊','🎯','📁'] },
+  ];
+
+  const DOT_CYCLE = ['dot-red','dot-gold','dot-teal','dot-blue','dot-purple'];
+  let selectedCatEmoji = '📁';
+
+  function suggestEmojis(name) {
+    const q = name.toLowerCase();
+    const matches = [];
+    for (const { keys, emojis } of EMOJI_SUGGESTIONS) {
+      if (keys.some(k => q.includes(k))) {
+        emojis.forEach(e => { if (!matches.includes(e)) matches.push(e); });
+      }
+    }
+    ['📁','📂','🗂️','📌','🔖'].forEach(e => { if (!matches.includes(e)) matches.push(e); });
+    return matches.slice(0, 8);
+  }
+
+  function onNewCatInput(val) {
+    const suggestions = suggestEmojis(val);
+    if (suggestions.length) {
+      selectedCatEmoji = suggestions[0];
+      document.getElementById('new-cat-emoji-preview').textContent = selectedCatEmoji;
+    }
+    const container = document.getElementById('new-cat-emoji-suggestions');
+    container.innerHTML = suggestions.map(e =>
+      `<span onclick="pickEmoji('${e}')" title="Use ${e}"
+        style="font-size:1.3rem;cursor:pointer;padding:3px 5px;border-radius:5px;border:1.5px solid transparent;transition:all 0.12s;"
+        onmouseover="this.style.background='#fff';this.style.borderColor='var(--rule)'"
+        onmouseout="this.style.background='transparent';this.style.borderColor='transparent'">${e}</span>`
+    ).join('');
+    document.getElementById('new-cat-error').textContent = '';
+  }
+
+  function pickEmoji(emoji) {
+    selectedCatEmoji = emoji;
+    document.getElementById('new-cat-emoji-preview').textContent = emoji;
+  }
+
+  function openNewCatForm() {
+    document.getElementById('new-cat-form').style.display = '';
+    document.getElementById('add-cat-btn').style.display = 'none';
+    document.getElementById('new-cat-name').value = '';
+    document.getElementById('new-cat-emoji-suggestions').innerHTML = '';
+    document.getElementById('new-cat-error').textContent = '';
+    selectedCatEmoji = '📁';
+    document.getElementById('new-cat-emoji-preview').textContent = '📁';
+    setTimeout(() => document.getElementById('new-cat-name').focus(), 80);
+  }
+
+  function cancelNewCat() {
+    document.getElementById('new-cat-form').style.display = 'none';
+    document.getElementById('add-cat-btn').style.display = '';
+  }
+
+  function confirmNewCat() {
+    const name = document.getElementById('new-cat-name').value.trim();
+    if (!name) { document.getElementById('new-cat-error').textContent = '⚠ Please enter a category name.'; return; }
+    const exists = Object.values(CAT_LABELS).some(l => l.toLowerCase() === name.toLowerCase());
+    if (exists) { document.getElementById('new-cat-error').textContent = '⚠ A category with that name already exists.'; return; }
+    const key = 'cat-' + name.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').slice(0, 20) + '-' + Date.now().toString(36);
+    const usedDots = Object.values(CAT_DOTS);
+    const nextDot = DOT_CYCLE.find(d => !usedDots.includes(d)) || DOT_CYCLE[Object.keys(CAT_DOTS).length % DOT_CYCLE.length];
+    CAT_LABELS[key] = name;
+    CAT_DOTS[key]   = nextDot;
+    CAT_EMOJIS[key] = selectedCatEmoji;
+    appendCatButton(key);
+    persistCats();
+    cancelNewCat();
+    const newBtn = document.querySelector(`#cat-btns .art-toggle[data-val="${key}"]`);
+    if (newBtn) selectArticleCat(newBtn);
+  }
+
+  function appendCatButton(key) {
+    const emoji = CAT_EMOJIS[key] || '📁';
+    const label = CAT_LABELS[key] || key;
+    const btn = document.createElement('button');
+    btn.className = 'art-toggle';
+    btn.dataset.val = key;
+    btn.setAttribute('onclick', 'selectArticleCat(this)');
+    btn.innerHTML = `<span style="font-size:1rem;">${emoji}</span> <span style="font-weight:600;font-size:0.82rem;">${label}</span>`;
+    document.getElementById('cat-btns').appendChild(btn);
   }
 
   function updateRteToolbar() {
