@@ -556,7 +556,7 @@
   function buildArticleHTML(art) {
     const typePill = `<span class="pill pill-${art.type}">${TYPE_LABELS[art.type]}</span>`;
     const colors = { ap:['var(--accent)','var(--accent-soft)'], ar:['var(--gold)','var(--gold-soft)'], inv:['var(--teal)','var(--teal-soft)'], ic:['#6a8ccc','#eef0fa'], memo:['#9b6fcc','#f3eefa'] };
-    const [c, bg] = colors[art.cat];
+    const [c, bg] = colors[art.cat] || ['#6a8ccc', '#eef0fa'];
     const updStr = art.updated ? ` &nbsp;·&nbsp; <span style="color:var(--gold);">Updated ${formatDate(art.updated)}</span>` : '';
     return `
       <div class="section-title">${art.title} ${typePill}</div>
@@ -599,7 +599,7 @@
     item.id = 'nav-' + id;
     item.dataset.keywords = (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase();
     item.setAttribute('onclick', `show('${id}', this)`);
-    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
+    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat] || 'dot-blue'}"></span>${art.title}`;
     sec.appendChild(item);
   }
 
@@ -608,7 +608,7 @@
     const item = document.getElementById('nav-' + id);
     if (!item) return;
     item.dataset.keywords = (art.title + ' ' + art.cat + ' ' + art.type).toLowerCase();
-    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat]}"></span>${art.title}`;
+    item.innerHTML = `<span class="nav-dot ${CAT_DOTS[art.cat] || 'dot-blue'}"></span>${art.title}`;
     const secId = 'nav-section-' + art.cat;
     let sec = document.getElementById(secId);
     if (!sec) {
